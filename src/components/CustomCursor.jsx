@@ -13,19 +13,38 @@ export default function CustomCursor() {
       const element = document.elementFromPoint(e.clientX, e.clientY)
       if (element) {
         const computedStyle = window.getComputedStyle(element)
+        
+        // Priorizar el color del texto sobre el fondo
+        const textColor = computedStyle.color
         const bgColor = computedStyle.backgroundColor
         
-        // Convertir RGB a valores numéricos para determinar si es oscuro o claro
-        const rgbMatch = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/)
-        if (rgbMatch) {
-          const r = parseInt(rgbMatch[1])
-          const g = parseInt(rgbMatch[2])
-          const b = parseInt(rgbMatch[3])
-          
-          // Calcular luminosidad (fórmula estándar)
-          const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
-          setIsDarkBackground(luminance < 0.5)
+        // Función para convertir color a luminosidad
+        const getLuminance = (colorStr) => {
+          const rgbMatch = colorStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
+          if (rgbMatch) {
+            const r = parseInt(rgbMatch[1])
+            const g = parseInt(rgbMatch[2])
+            const b = parseInt(rgbMatch[3])
+            return (0.299 * r + 0.587 * g + 0.114 * b) / 255
+          }
+          return 0.5 // Default si no puede detectar
         }
+        
+        // Si el elemento tiene texto, usar el color del texto
+        const elementText = element.textContent || element.innerText
+        let isLightSurface = false
+        
+        if (elementText.trim().length > 0) {
+          // Es un elemento con texto, usar el color del texto
+          const textLuminance = getLuminance(textColor)
+          isLightSurface = textLuminance > 0.7 // Texto claro
+        } else {
+          // Es un elemento sin texto, usar el color de fondo
+          const bgLuminance = getLuminance(bgColor)
+          isLightSurface = bgLuminance > 0.7 // Fondo claro
+        }
+        
+        setIsDarkBackground(!isLightSurface)
       }
     }
 

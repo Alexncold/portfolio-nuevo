@@ -75,7 +75,7 @@ button:focus-visible {
   font-size: 12rem;
   font-weight: 700;
   color: rgba(250, 250, 250, 1.0);
-  position: fixed;
+  position: absolute; /* ← CAMBIADO: Ahora relativo al content-container */
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -90,7 +90,7 @@ button:focus-visible {
   font-size: 2rem;
   font-weight: 300;
   color: rgba(250, 250, 250, 1.0);
-  position: fixed;
+  position: absolute; /* ← CAMBIADO: Ahora relativo al content-container */
   top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -98,7 +98,25 @@ button:focus-visible {
   text-align: center;
 }
 
+/* Contenedor principal para el contenido con límite de ancho */
+.content-container {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1024px; /* ← LÍMITE DE ANCHO PARA DESKTOP */
+  height: 100vh;
+  pointer-events: none; /* No interferir con eventos del mouse */
+  z-index: 100; /* Mismo nivel que los textos */
+}
+
 @media (max-width: 768px) {
+  .content-container {
+    max-width: 100%; /* ← MÓVIL: Sin límite de ancho */
+    padding: 0 20px; /* ← MÓVIL: Pequeños márgenes laterales */
+  }
+  
   .prueba-text {
     font-size: 4rem;
     top: 25%;

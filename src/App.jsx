@@ -13,11 +13,13 @@ function App() {
       <MainContainer>
         {/* Contenido del portfolio irá aquí */}
       </MainContainer>
-      <div className="prueba-text">
-        <span className="text-part-1">ALEJANDRO.</span><span className="text-part-2">S</span>
-      </div>
-      <div className="subtitle">
-        (ux designer)
+      <div className="content-container">
+        <div className="prueba-text">
+          <span className="text-part-1">ALEJANDRO.</span><span className="text-part-2">S</span>
+        </div>
+        <div className="subtitle">
+          (ux designer)
+        </div>
       </div>
     </>
   )
