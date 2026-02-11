@@ -1,0 +1,141 @@
+/* Contenedor principal del efecto spotlight */
+.spotlight-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 2vh);
+  pointer-events: none; /* No interferir con eventos del mouse */
+  z-index: 50; /* ← AUMENTADO: Mayor que MainContainer (z-index: 10) */
+  overflow: hidden;
+}
+
+/* Capa del grid iluminado */
+.spotlight-grid {
+  position: absolute;
+  top: 2vh;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* Fondo transparente para que no tape el grid base */
+  background: transparent;
+  
+  /* Mismo grid que MainContainer pero más brillante */
+  background-image: 
+    linear-gradient(to right, #555555 2px, transparent 2px),  /* Grid horizontal más brillante */
+    linear-gradient(to bottom, #555555 2px, transparent 2px); /* Grid vertical más brillante */
+  background-size: 150px 150px;
+  
+  /* Máscara radial para crear el efecto de linterna */
+  mask-image: radial-gradient(
+    circle 500px at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+    rgba(255, 255, 255, 1) 0%,           /* Centro completamente visible */
+    rgba(255, 255, 255, 0.8) 20%,        /* Comienzo del desvanecimiento */
+    rgba(255, 255, 255, 0.3) 50%,        /* Mitad del radio */
+    rgba(255, 255, 255, 0.1) 70%,        /* Casi transparente */
+    rgba(255, 255, 255, 0) 100%          /* Completamente transparente en los bordes */
+  );
+  -webkit-mask-image: radial-gradient(
+    circle 500px at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.8) 20%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.1) 70%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  
+  /* Suavizar los bordes del spotlight */
+  mask-mode: alpha;
+  -webkit-mask-mode: alpha;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-position: center;
+}
+
+/* Capa de glow para efecto cinematográfico (opcional) */
+.spotlight-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* Gradiente radial para el efecto de brillo */
+  background: radial-gradient(
+    circle 450px at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+    rgba(255, 255, 255, 0.05) 0%,        /* Centro sutil */
+    rgba(255, 255, 255, 0.02) 30%,       /* Desvanecimiento */
+    rgba(255, 255, 255, 0) 70%           /* Transparente */
+  );
+  
+  /* Sin máscara, el glow es sutil y se mezcla con el fondo */
+  pointer-events: none;
+}
+
+/* Optimización para dispositivos móviles (touch) */
+@media (pointer: coarse) {
+  .spotlight-container {
+    display: none; /* Desactivar en dispositivos táctiles */
+  }
+}
+
+/* Optimización para rendimiento */
+.spotlight-grid,
+.spotlight-glow {
+  will-change: mask-image, -webkit-mask-image, background;
+  transform: translateZ(0); /* Aceleración por hardware */
+  backface-visibility: hidden;
+}
+
+/* Efecto de transición suave cuando el mouse entra/sale */
+.spotlight-grid {
+  transition: mask-image 0.1s ease-out, -webkit-mask-image 0.1s ease-out;
+}
+
+/* Responsive: ajustar tamaño del spotlight en pantallas más pequeñas */
+@media (max-width: 768px) {
+  .spotlight-grid {
+    /* Reducir tamaño de grilla para móvil */
+    background-size: 80px 80px;
+    
+    mask-image: radial-gradient(
+      circle 350px at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.8) 20%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0.1) 70%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    -webkit-mask-image: radial-gradient(
+      circle 350px at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.8) 20%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0.1) 70%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+  
+  .spotlight-glow {
+    background: radial-gradient(
+      circle 250px at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.02) 30%,
+      rgba(255, 255, 255, 0) 70%
+    );
+  }
+
+   .spotlight-container {
+    top: 1vh;
+    height: calc(100vh - 1vh);
+  }
+}
+
+/* Para navegadores que no soportan mask-image */
+@supports not (mask-image: radial-gradient(circle, white, transparent)) {
+  .spotlight-container {
+    display: none; /* Fallback graceful */
+  }
+}

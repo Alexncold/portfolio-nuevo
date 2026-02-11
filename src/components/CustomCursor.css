@@ -1,0 +1,66 @@
+/* Ocultar cursor por defecto */
+body {
+  cursor: none !important;
+}
+
+/* Círculo exterior */
+.custom-cursor-circle {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: border-color 0.2s ease;
+}
+
+/* Punto central */
+.custom-cursor-dot {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: background-color 0.2s ease;
+}
+
+/* Colores para fondo oscuro (por defecto) */
+.custom-cursor-circle.dark-bg {
+  border-color: #ffffff;
+}
+
+.custom-cursor-dot.dark-bg {
+  background-color: #ffffff;
+}
+
+/* Colores para fondo claro */
+.custom-cursor-circle.light-bg {
+  border-color: #161616;
+}
+
+.custom-cursor-dot.light-bg {
+  background-color: #161616;
+}
+
+/* Efecto hover para elementos interactivos */
+button, a, input, textarea, [role="button"] {
+  cursor: none !important;
+}
+
+button:hover, a:hover, input:hover, textarea:hover, [role="button"]:hover {
+  cursor: none !important;
+}
+
+/* Efecto de escala en hover */
+.custom-cursor-circle.hover {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.custom-cursor-dot.hover {
+  transform: translate(-50%, -50%) scale(1.5);
+}
