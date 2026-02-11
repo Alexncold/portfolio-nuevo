@@ -20,11 +20,13 @@ export default function CustomCursor() {
         
         // Función para convertir color a luminosidad
         const getLuminance = (colorStr) => {
-          const rgbMatch = colorStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
+          // CORREGIDO: Regex ahora acepta espacios opcionales
+          const rgbMatch = colorStr.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/)
           if (rgbMatch) {
             const r = parseInt(rgbMatch[1])
             const g = parseInt(rgbMatch[2])
             const b = parseInt(rgbMatch[3])
+            // Fórmula estándar de luminosidad relativa
             return (0.299 * r + 0.587 * g + 0.114 * b) / 255
           }
           return 0.5 // Default si no puede detectar

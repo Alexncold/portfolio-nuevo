@@ -20,6 +20,9 @@ function App() {
         <div className="subtitle">
           (ux designer)
         </div>
+        <div className="test-square">
+          {/* Cuadrado de prueba para el cursor */}
+        </div>
       </div>
     </>
   )
