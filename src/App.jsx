@@ -13,15 +13,20 @@ function App() {
       <MainContainer>
         {/* Contenido del portfolio irá aquí */}
       </MainContainer>
+      <nav className="navbar">
+        <a href="https://linkedin.com" className="navbar-text" target="_blank" rel="noopener noreferrer">
+          <span>Linkedin</span>
+          <span className="material-symbols-outlined">
+            east
+          </span>
+        </a>
+      </nav>
       <div className="content-container">
         <div className="prueba-text">
           <span className="text-part-1">ALEJANDRO.</span><span className="text-part-2">S</span>
         </div>
         <div className="subtitle">
           (ux designer)
-        </div>
-        <div className="test-square">
-          {/* Cuadrado de prueba para el cursor */}
         </div>
       </div>
     </>
