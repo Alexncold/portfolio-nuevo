@@ -14,12 +14,15 @@ function App() {
         {/* Contenido del portfolio irá aquí */}
       </MainContainer>
       <nav className="navbar">
-        <a href="https://linkedin.com" className="navbar-text" target="_blank" rel="noopener noreferrer">
-          <span>Linkedin</span>
-          <span className="material-symbols-outlined">
-            east
-          </span>
-        </a>
+        <div className="navbar-text-container">
+          <a href="https://linkedin.com" className="navbar-text" target="_blank" rel="noopener noreferrer">
+            <span>Linkedin</span>
+            <span className="material-symbols-outlined">
+              east
+            </span>
+          </a>
+          <div className="navbar-underline"></div>
+        </div>
       </nav>
       <div className="content-container">
         <div className="prueba-text">
