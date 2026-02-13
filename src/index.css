@@ -134,11 +134,27 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: -12px;
 }
 
 .logo-svg {
   width: 90px; /* ← AUMENTADO: De 60px a 90px (todo el alto del navbar) */
   height: 90px;
+}
+
+/* Animación de revelado para la imagen del logo */
+.logo-svg image {
+  clip-path: inset(0 100% 0 0);
+  animation: revealImageFromLeft 0.6s ease-out 0.2s forwards;
+}
+
+@keyframes revealImageFromLeft {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 /* Texto circular del logo */
@@ -165,11 +181,17 @@ button:focus-visible {
 .navbar-text-container {
   position: relative;
   display: inline-flex;
-  flex-direction: column;
-  gap: 12px; /* ← AUMENTADO: De 8px a 12px */
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   height: 100%;
+}
+
+.navbar-text-mask {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  padding-bottom: 13px;
 }
 
 .navbar-text {
@@ -194,7 +216,6 @@ button:focus-visible {
   transform: translateY(40px); /* ← AUMENTADO: De 20px a 40px */
   position: relative;
   z-index: 1; /* ← DEBAJO del subrayado */
-  clip-path: inset(0 0 calc(100% - 1px) 0); /* ← AJUSTADO: Llega hasta el subrayado */
 }
 
 /* Animación de máscara para revelar texto */
@@ -210,15 +231,14 @@ button:focus-visible {
 /* Aplicar animación de máscara al texto e icono */
 .navbar-text > * {
   animation: 
-    slideUpFromBottom 0.4s ease-out 0.6s forwards, /* ← ANTES: De 0.7s a 0.6s */
-    revealText 0.4s ease-out 0.6s forwards; /* ← ANTES: De 0.7s a 0.6s */
+    slideUpFromBottom 0.4s ease-out 0.6s forwards; /* ← ANTES: De 0.7s a 0.6s */
 }
 
 /* Subrayado - ahora es un elemento normal del flex, NO absolute */
 .navbar-underline {
-  position: relative; /* CAMBIAR: de absolute a relative */
-  bottom: auto; /* ELIMINAR: el posicionamiento absoluto */
-  left: auto; /* ELIMINAR: el posicionamiento absoluto */
+  position: absolute;
+  left: 0;
+  bottom: 0;
   width: 100%;
   height: 1px;
   background: rgba(250, 250, 250, 1.0);
@@ -300,6 +320,7 @@ button:focus-visible {
 
 .text-part-2 {
   display: inline-block;
+  margin-right: -0.06em;
   animation: slideUpText 0.8s ease-in-out 0.65s forwards;
 }
 

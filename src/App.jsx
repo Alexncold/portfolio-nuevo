@@ -33,13 +33,15 @@ function App() {
           </svg>
         </div>
         <div className="navbar-text-container">
-          <a href="https://linkedin.com" className="navbar-text" target="_blank" rel="noopener noreferrer">
-            <span>Linkedin</span>
-            <span className="material-symbols-outlined">
-              east
-            </span>
-          </a>
-          <div className="navbar-underline"></div>
+          <div className="navbar-text-mask">
+            <a href="https://linkedin.com" className="navbar-text" target="_blank" rel="noopener noreferrer">
+              <span>Linkedin</span>
+              <span className="material-symbols-outlined">
+                east
+              </span>
+            </a>
+            <div className="navbar-underline"></div>
+          </div>
         </div>
       </nav>
       <div className="content-container">
