@@ -120,13 +120,35 @@ button:focus-visible {
   transform: translateX(-50%); /* ← CENTRADO COMO CONTENT-CONTAINER */
   z-index: 1000; /* Por encima de todo */
   display: flex;
-  align-items: center;
-  justify-content: flex-end; /* ← ALINEADO A LA DERECHA */
+  align-items: center; /* ← CENTRADO VERTICAL DE TODO */
+  justify-content: space-between; /* ← ESPACIO ENTRE ELEMENTOS */
   gap: 8px;
   width: 100%; /* ← ANCHO DEL CONTENEDOR */
   max-width: 1024px; /* ← MISMO LÍMITE QUE CONTENT-CONTAINER */
-  height: 45px; /* ← REDUCIDO: Mitad de 90px */
+  height: 90px; /* ← DUPLICADO: De 45px a 90px */
+  background: rgba(255, 0, 0, 0.5); /* ← FONDO ROJO TEMPORAL PARA TEST */
   pointer-events: auto; /* Permitir interacción */
+}
+
+/* Logo circular del navbar */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-svg {
+  width: 60px; /* ← AUMENTADO: De 40px a 60px */
+  height: 60px;
+}
+
+/* Texto circular del logo */
+.logo-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px; /* ← AUMENTADO: De 8px a 12px */
+  letter-spacing: 1px;
+  text-transform: lowercase;
+  fill: rgba(250, 250, 250, 1.0);
 }
 
 /* Contenedor que envuelve texto y subrayado para mismo ancho */
@@ -180,7 +202,7 @@ button:focus-visible {
   bottom: -8px; /* ← MISMA POSICIÓN que antes */
   left: 0;
   width: 100%; /* ← ANCHO: 100% del contenedor padre */
-  height: 2px; /* ← GROSOR: Línea fina */
+  height: 1px; /* ← GROSOR: Línea más fina */
   background: rgba(250, 250, 250, 1.0); /* ← COLOR: Blanco */
   opacity: 0; /* ← OCULTO INICIALMENTE */
   animation: slideInFromLeft 0.4s ease-out 0.3s forwards; /* ← MÁS RÁPIDA: De 0.6s a 0.4s */
