@@ -151,10 +151,15 @@ button:focus-visible {
   fill: rgba(250, 250, 250, 1.0);
 }
 
-/* Contenedor que envuelve texto y subrayado para mismo ancho */
+/* Contenedor que envuelve texto y subrayado */
 .navbar-text-container {
   position: relative;
-  display: inline-block; /* ← AJUSTADO: Ocupa solo el ancho del contenido */
+  display: inline-flex;
+  flex-direction: column;
+  gap: 8px; /* Espacio entre texto y subrayado */
+  justify-content: center; /* Centra verticalmente TODO el contenido */
+  align-items: flex-start;
+  height: 100%; /* Usa toda la altura del navbar (90px) */
 }
 
 .navbar-text {
@@ -196,17 +201,17 @@ button:focus-visible {
     revealText 0.4s ease-out 0.6s forwards; /* ← ANTES: De 0.7s a 0.6s */
 }
 
-/* Contenedor independiente para el subrayado */
+/* Subrayado - ahora es un elemento normal del flex, NO absolute */
 .navbar-underline {
-  position: absolute;
-  bottom: -8px; /* ← MISMA POSICIÓN que antes */
-  left: 0;
-  width: 100%; /* ← ANCHO: 100% del contenedor padre */
-  height: 1px; /* ← GROSOR: Línea más fina */
-  background: rgba(250, 250, 250, 1.0); /* ← COLOR: Blanco */
-  opacity: 0; /* ← OCULTO INICIALMENTE */
-  animation: slideInFromLeft 0.4s ease-out 0.3s forwards; /* ← MÁS RÁPIDA: De 0.6s a 0.4s */
-  z-index: 10; /* ← POR ENCIMA de todo, incluyendo la máscara */
+  position: relative; /* CAMBIAR: de absolute a relative */
+  bottom: auto; /* ELIMINAR: el posicionamiento absoluto */
+  left: auto; /* ELIMINAR: el posicionamiento absoluto */
+  width: 100%;
+  height: 1px;
+  background: rgba(250, 250, 250, 1.0);
+  opacity: 0;
+  animation: slideInFromLeft 0.4s ease-out 0.3s forwards;
+  z-index: 10;
 }
 
 /* Animación de carga para el subrayado */
