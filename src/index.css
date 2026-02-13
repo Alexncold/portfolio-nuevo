@@ -156,23 +156,26 @@ button:focus-visible {
   position: relative;
   display: inline-flex;
   flex-direction: column;
-  gap: 8px; /* Espacio entre texto y subrayado */
-  justify-content: center; /* Centra verticalmente TODO el contenido */
+  gap: 12px; /* ← AUMENTADO: De 8px a 12px */
+  justify-content: center;
   align-items: flex-start;
-  height: 100%; /* Usa toda la altura del navbar (90px) */
+  height: 100%;
 }
 
 .navbar-text {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.2rem; /* ← REDUCIDO: De 1.4rem a 1.2rem */
+  font-size: 1.2rem;
   font-weight: 400;
   color: rgba(250, 250, 250, 1.0);
   text-decoration: none;
   transition: color 0.2s ease;
-  display: flex; /* ← AGREGADO: Para alinear horizontalmente */
-  align-items: center; /* ← AGREGADO: Centrar verticalmente */
-  gap: 12px; /* ← AUMENTADO: De 6px a 12px */
-  position: relative; /* ← AGREGADO: Para posicionar el subrayado */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  line-height: 1; /* ← AGREGADO: Elimina espacio vertical extra */
+  padding: 0; /* ← AGREGADO: Sin padding interno */
+  margin: 0; /* ← AGREGADO: Sin margin interno */
 }
 
 /* Contenedor interno para animar solo texto e icono */
@@ -181,13 +184,13 @@ button:focus-visible {
   transform: translateY(40px); /* ← AUMENTADO: De 20px a 40px */
   position: relative;
   z-index: 1; /* ← DEBAJO del subrayado */
-  clip-path: inset(0 0 100% 0); /* ← MÁSCARA: Oculta todo inicialmente */
+  clip-path: inset(0 0 calc(100% - 1px) 0); /* ← AJUSTADO: Llega hasta el subrayado */
 }
 
 /* Animación de máscara para revelar texto */
 @keyframes revealText {
   0% {
-    clip-path: inset(0 0 100% 0); /* ← OCULTO: Todo cubierto */
+    clip-path: inset(0 0 calc(100% - 1px) 0); /* ← AJUSTADO: Llega hasta el subrayado */
   }
   100% {
     clip-path: inset(0 0 0 0); /* ← VISIBLE: Todo descubierto */
