@@ -19,11 +19,15 @@ function App() {
             <defs>
               <path id="circle-text" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" />
             </defs>
-            <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(250, 250, 250, 1.0)" strokeWidth="1" />
-            <circle cx="50" cy="50" r="25" fill="none" stroke="rgba(250, 250, 250, 1.0)" strokeWidth="0.5" />
-            <text className="logo-text" fill="rgba(250, 250, 250, 1.0)" fontSize="8" letterSpacing="1">
+            <image href="https://i.ibb.co/pBf7cqyr/avatar-ale-light.png" x="25" y="25" width="50" height="50" />
+            <text className="logo-text" fill="rgba(250, 250, 250, 1.0)" fontSize="14" letterSpacing="1">
               <textPath href="#circle-text" startOffset="25%" textAnchor="middle">
-                alejandro ux designer
+                alejandro.s
+              </textPath>
+            </text>
+            <text className="logo-text" fill="rgba(250, 250, 250, 1.0)" fontSize="14" letterSpacing="1">
+              <textPath href="#circle-text" startOffset="75%" textAnchor="middle">
+                alejandro.s
               </textPath>
             </text>
           </svg>

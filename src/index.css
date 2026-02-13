@@ -106,7 +106,7 @@ button:focus-visible {
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 1024px; /* ← LÍMITE DE ANCHO PARA DESKTOP */
+  max-width: 1366px; /* ← CAMBIADO: De 1024px a 1366px */
   height: 100vh;
   pointer-events: none; /* No interferir con eventos del mouse */
   z-index: 100; /* Mismo nivel que los textos */
@@ -124,9 +124,8 @@ button:focus-visible {
   justify-content: space-between; /* ← ESPACIO ENTRE ELEMENTOS */
   gap: 8px;
   width: 100%; /* ← ANCHO DEL CONTENEDOR */
-  max-width: 1024px; /* ← MISMO LÍMITE QUE CONTENT-CONTAINER */
+  max-width: 1366px; /* ← CAMBIADO: De 1024px a 1366px */
   height: 90px; /* ← DUPLICADO: De 45px a 90px */
-  background: rgba(255, 0, 0, 0.5); /* ← FONDO ROJO TEMPORAL PARA TEST */
   pointer-events: auto; /* Permitir interacción */
 }
 
@@ -138,17 +137,28 @@ button:focus-visible {
 }
 
 .logo-svg {
-  width: 60px; /* ← AUMENTADO: De 40px a 60px */
-  height: 60px;
+  width: 90px; /* ← AUMENTADO: De 60px a 90px (todo el alto del navbar) */
+  height: 90px;
 }
 
 /* Texto circular del logo */
 .logo-text {
   font-family: 'Montserrat', sans-serif;
-  font-size: 12px; /* ← AUMENTADO: De 8px a 12px */
+  font-size: 14px; /* ← REDUCIDO: De 18px a 14px */
   letter-spacing: 1px;
-  text-transform: lowercase;
   fill: rgba(250, 250, 250, 1.0);
+  animation: rotateText 10s linear infinite;
+  transform-origin: 50px 50px;
+}
+
+/* Animación de rotación infinita para texto circular */
+@keyframes rotateText {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Contenedor que envuelve texto y subrayado */
@@ -309,7 +319,7 @@ button:focus-visible {
   width: 100%;
   height: 100%;
   background-color: #161616;
-  z-index: 1000; /* ← AUMENTADO: Por encima de todo durante la carga */
+  z-index: 9999; /* ← MÁXIMO: Por encima de absolutamente todo */
   animation: revealFromTop 1.6s ease-in-out forwards;
 }
 
