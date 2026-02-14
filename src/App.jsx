@@ -18,16 +18,45 @@ function App() {
           <svg viewBox="0 0 100 100" className="logo-svg">
             <defs>
               <path id="circle-text" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" />
+              <mask id="logo-mask">
+                <rect width="100" height="100" fill="black" />
+                <path
+                  d="M 20 25 H 80 L 20 33 H 80 L 20 41 H 80 L 20 49 H 80 L 20 57 H 80 L 20 65 H 80 L 20 73 H 80"
+                  className="mask-path"
+                  pathLength="1"
+                  transform="rotate(-12 50 50)"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="16"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <rect
+                  x="25"
+                  y="25"
+                  width="50"
+                  height="50"
+                  fill="white"
+                  className="mask-final"
+                />
+              </mask>
             </defs>
-            <image href="https://i.ibb.co/pBf7cqyr/avatar-ale-light.png" x="25" y="25" width="50" height="50" />
-            <text className="logo-text" fill="rgba(250, 250, 250, 1.0)" fontSize="14" letterSpacing="1">
+            <image 
+              href="https://i.ibb.co/pBf7cqyr/avatar-ale-light.png" 
+              x="25" 
+              y="25" 
+              width="50" 
+              height="50"
+              mask="url(#logo-mask)"
+            />
+            <text className="logo-text" fill="rgba(250, 250, 250, 1.0)" fontSize="11" letterSpacing="1">
               <textPath href="#circle-text" startOffset="25%" textAnchor="middle">
-                alejandro.s
+                ALEJANDRO.S
               </textPath>
             </text>
-            <text className="logo-text" fill="rgba(250, 250, 250, 1.0)" fontSize="14" letterSpacing="1">
+            <text className="logo-text" fill="rgba(250, 250, 250, 1.0)" fontSize="11" letterSpacing="1">
               <textPath href="#circle-text" startOffset="75%" textAnchor="middle">
-                alejandro.s
+                ALEJANDRO.S
               </textPath>
             </text>
           </svg>
