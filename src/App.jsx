@@ -80,6 +80,15 @@ function App() {
         <div className="subtitle">
           (ux designer)
         </div>
+        <div className="location-text">
+          BASED IN<br />ARGENTINA
+        </div>
+        <div className="location-text-right">
+          PORTFOLIO / PROYECTOS<br />TRABAJOS
+        </div>
+        <div className="location-text-light">
+          EN UNA MAGICA<br />PROVINCIA<br />DEL NORTE
+        </div>
       </div>
     </>
   )
