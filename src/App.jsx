@@ -74,17 +74,22 @@ function App() {
         </div>
       </nav>
       <div className="content-container">
-        <div className="prueba-text">
-          <span className="text-part-1">ALEJANDRO.</span><span className="text-part-2">S</span>
-        </div>
-        <div className="subtitle">
-          (ux designer)
+        <div className="title-group">
+          <div className="prueba-text">
+            <span className="text-part-1">ALEJANDRO.</span><span className="text-part-2">S</span>
+          </div>
+          <div className="subtitle">
+            (ux designer)
+          </div>
         </div>
         <div className="location-text">
           BASED IN<br />ARGENTINA
         </div>
         <div className="location-text-right">
-          PORTFOLIO / PROYECTOS<br />TRABAJOS
+          PORTFOLIO / PROYECTOS<br />/ TRABAJOS
+          <div className="location-text-light">
+            BIENVENIDO AL REPO DE<br />MIS DISEÑOS
+          </div>
         </div>
         <div className="location-text-light">
           EN UNA MAGICA<br />PROVINCIA<br />DEL NORTE

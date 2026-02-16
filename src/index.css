@@ -71,16 +71,24 @@ button:focus-visible {
   }
 }
 
-.prueba-text {
-  font-family: 'Instrument Serif', serif;
-  font-size: 14rem; /* ← AGRANDADO: De 12rem a 14rem */
-  font-weight: 700;
-  color: rgba(250, 250, 250, 1.0);
-  position: absolute; /* ← CAMBIADO: Ahora relativo al content-container */
-  top: 40%; /* ← BAJADO: De 35% a 40% */
+/* Nuevo contenedor para agrupar ambos */
+.title-group {
+  position: absolute;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 100; /* ← AUMENTADO: Mayor que spotlight (z-index: 50) */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Alinea los hijos a la derecha del contenedor */
+  z-index: 100;
+}
+
+.prueba-text {
+  font-family: 'Instrument Serif', serif;
+  font-size: 14rem;
+  font-weight: 700;
+  color: rgba(250, 250, 250, 1.0);
+  position: relative; /* Cambiado de absolute a relative */
   text-align: center;
   display: inline-block;
   white-space: nowrap;
@@ -91,15 +99,12 @@ button:focus-visible {
   font-size: 2rem;
   font-weight: 300;
   color: rgba(250, 250, 250, 1.0);
-  position: absolute;
-  top: 53%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* ← SIEMPRE centrado horizontalmente */
-  z-index: 100;
-  text-align: center;
+  position: relative; /* Cambiado de absolute a relative */
+  text-align: right; /* Alineación de texto a la derecha */
   opacity: 0;
-  margin-top: 20px; /* ← Offset vertical inicial */
+  margin-top: -75px; /* ← UN POCO MÁS CERCANO */
   animation: slideUpSubtitle 0.6s ease-out 1.2s forwards;
+  width: 100%; /* Ocupa el ancho del contenedor (que dicta el título) */
 }
 
 .location-text {
@@ -108,12 +113,12 @@ button:focus-visible {
   font-weight: 700; /* ← BOLD */
   color: rgba(250, 250, 250, 1.0);
   position: absolute;
-  top: 77%; /* ← BAJADO 12% */
+  top: 75%; /* ← ALINEADO POR ARRIBA (Aprox visualmente al centro anterior) */
   left: 20px; /* ← ALINEADO A LA IZQUIERDA */
-  transform: translateY(-50%);
+  /* transform: translateY(-50%); ELIMINADO para alinear por arriba */
   z-index: 100;
   opacity: 1; /* ← SIEMPRE VISIBLE */
-  line-height: 1.1; /* ← MENOS ESPACIO ENTRE LÍNEAS */
+  line-height: 1.2; /* ← MÁS ESPACIO ENTRE LÍNEAS */
   padding-left: 50px; /* ← PADDING IZQUIERDO */
 }
 
@@ -123,12 +128,12 @@ button:focus-visible {
   font-weight: 700; /* ← BOLD (MISMO ESTILO) */
   color: rgba(250, 250, 250, 1.0);
   position: absolute;
-  top: 77%; /* ← MISMA ALTURA */
+  top: 75%; /* ← MISMA ALTURA QUE location-text */
   left: 25%; /* ← POSICIÓN INTERMEDIA */
-  transform: translateY(-50%);
+  /* transform: translateY(-50%); ELIMINADO para alinear por arriba con el otro texto */
   z-index: 100;
   opacity: 1; /* ← SIEMPRE VISIBLE */
-  line-height: 1.1; /* ← MENOS ESPACIO ENTRE LÍNEAS */
+  line-height: 1.2; /* ← MÁS ESPACIO ENTRE LÍNEAS */
   text-align: left; /* ← ALINEADO A LA IZQUIERDA DESDE LA POSICIÓN */
 }
 
@@ -143,8 +148,17 @@ button:focus-visible {
   transform: translateY(-50%);
   z-index: 100;
   opacity: 1; /* ← SIEMPRE VISIBLE */
-  line-height: 1.1; /* ← MENOS ESPACIO ENTRE LÍNEAS */
+  line-height: 1.2; /* ← MÁS ESPACIO ENTRE LÍNEAS */
   padding-left: 50px; /* ← PADDING IZQUIERDO */
+}
+
+.location-text-right .location-text-light {
+  position: relative; /* ← RELATIVO AL CONTENEDOR PADRE */
+  top: auto; /* ← ELIMINAR POSICIONAMIENTO ABSOLUTO */
+  left: auto; /* ← ELIMINAR POSICIONAMIENTO ABSOLUTO */
+  transform: none; /* ← ELIMINAR TRANSFORM */
+  margin-top: 20px; /* ← ESPACIO DESDE / TRABAJOS */
+  padding-left: 0; /* ← SIN PADDING ADICIONAL */
 }
 
 /* Contenedor principal para el contenido con límite de ancho */
@@ -399,11 +413,11 @@ button:focus-visible {
 @keyframes slideUpSubtitle {
   0% {
     opacity: 0;
-    margin-top: 20px; /* ← Empieza abajo */
+    transform: translateY(20px);
   }
   100% {
     opacity: 1;
-    margin-top: 0; /* ← Sube a posición normal */
+    transform: translateY(0);
   }
 }
 
