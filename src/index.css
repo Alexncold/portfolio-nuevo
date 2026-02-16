@@ -1,0 +1,561 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* Nuevo contenedor para agrupar ambos */
+.title-group {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  /* Alinea los hijos a la derecha del contenedor */
+  z-index: 100;
+}
+
+.prueba-text {
+  font-family: 'Instrument Serif', serif;
+  font-size: 14rem;
+  font-weight: 700;
+  color: rgba(250, 250, 250, 1.0);
+  position: relative;
+  /* Cambiado de absolute a relative */
+  text-align: center;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: rgba(250, 250, 250, 1.0);
+  position: relative;
+  /* Cambiado de absolute a relative */
+  text-align: right;
+  /* Alineación de texto a la derecha */
+  opacity: 0;
+  margin-top: -75px;
+  /* ← UN POCO MÁS CERCANO */
+  margin-right: -10px;
+  /* ← AJUSTE FINO: Alinear con el título */
+  animation: slideUpSubtitle 0.6s ease-out 1.2s forwards;
+  width: 100%;
+  /* Ocupa el ancho del contenedor (que dicta el título) */
+}
+
+.location-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  /* ← MÁS CHICO */
+  font-weight: 700;
+  /* ← BOLD */
+  color: rgba(250, 250, 250, 1.0);
+  position: absolute;
+  top: 75%;
+  /* ← ALINEADO POR ARRIBA (Aprox visualmente al centro anterior) */
+  left: 20px;
+  /* ← ALINEADO A LA IZQUIERDA */
+  /* transform: translateY(-50%); ELIMINADO para alinear por arriba */
+  z-index: 100;
+  opacity: 1;
+  /* ← SIEMPRE VISIBLE */
+  line-height: 1.2;
+  /* ← MÁS ESPACIO ENTRE LÍNEAS */
+  padding-left: 50px;
+  /* ← PADDING IZQUIERDO */
+}
+
+.location-text-right {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  /* ← MÁS CHICO */
+  font-weight: 700;
+  /* ← BOLD (MISMO ESTILO) */
+  color: rgba(250, 250, 250, 1.0);
+  position: absolute;
+  top: 75%;
+  /* ← MISMA ALTURA QUE location-text */
+  left: 25%;
+  /* ← POSICIÓN INTERMEDIA */
+  /* transform: translateY(-50%); ELIMINADO para alinear por arriba con el otro texto */
+  z-index: 100;
+  opacity: 1;
+  /* ← SIEMPRE VISIBLE */
+  line-height: 1.2;
+  /* ← MÁS ESPACIO ENTRE LÍNEAS */
+  text-align: left;
+  /* ← ALINEADO A LA IZQUIERDA DESDE LA POSICIÓN */
+}
+
+.location-text-light {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  /* ← MÁS CHICO */
+  font-weight: 300;
+  /* ← LIGHT */
+  color: rgba(250, 250, 250, 1.0);
+  position: absolute;
+  top: 84%;
+  /* ← BAJADO 12% */
+  left: 20px;
+  /* ← ALINEADO A LA IZQUIERDA */
+  transform: translateY(-50%);
+  z-index: 100;
+  opacity: 1;
+  /* ← SIEMPRE VISIBLE */
+  line-height: 1.2;
+  /* ← MÁS ESPACIO ENTRE LÍNEAS */
+  padding-left: 50px;
+  /* ← PADDING IZQUIERDO */
+}
+
+.location-text-right .location-text-light {
+  position: relative;
+  /* ← RELATIVO AL CONTENEDOR PADRE */
+  top: auto;
+  /* ← ELIMINAR POSICIONAMIENTO ABSOLUTO */
+  left: auto;
+  /* ← ELIMINAR POSICIONAMIENTO ABSOLUTO */
+  transform: none;
+  /* ← ELIMINAR TRANSFORM */
+  margin-top: 20px;
+  /* ← ESPACIO DESDE / TRABAJOS */
+  padding-left: 0;
+  /* ← SIN PADDING ADICIONAL */
+}
+
+/* Contenedor principal para el contenido con límite de ancho */
+.content-container {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1366px;
+  /* ← CAMBIADO: De 1024px a 1366px */
+  height: 100vh;
+  pointer-events: none;
+  /* No interferir con eventos del mouse */
+  z-index: 100;
+  /* Mismo nivel que los textos */
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 2vh;
+  /* ← MARGEN IGUAL QUE MAIN CONTAINER */
+  left: 50%;
+  /* ← CENTRADO COMO CONTENT-CONTAINER */
+  transform: translateX(-50%);
+  /* ← CENTRADO COMO CONTENT-CONTAINER */
+  z-index: 1000;
+  /* Por encima de todo */
+  display: flex;
+  align-items: center;
+  /* ← CENTRADO VERTICAL DE TODO */
+  justify-content: space-between;
+  /* ← ESPACIO ENTRE ELEMENTOS */
+  gap: 8px;
+  width: 100%;
+  /* ← ANCHO DEL CONTENEDOR */
+  max-width: 1366px;
+  /* ← CAMBIADO: De 1024px a 1366px */
+  height: 90px;
+  /* ← DUPLICADO: De 45px a 90px */
+  pointer-events: auto;
+  /* Permitir interacción */
+}
+
+/* Logo circular del navbar */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -12px;
+}
+
+.logo-svg {
+  width: 90px;
+  /* ← AUMENTADO: De 60px a 90px (todo el alto del navbar) */
+  height: 90px;
+}
+
+/* Animación de revelado para la imagen del logo */
+.mask-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: drawLogoMask 1.5s ease-out 0.2s forwards;
+}
+
+.mask-final {
+  opacity: 0;
+  animation: finishLogoReveal 0.01s linear 1.68s forwards;
+}
+
+@keyframes drawLogoMask {
+  0% {
+    stroke-dashoffset: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes finishLogoReveal {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Texto circular del logo */
+.logo-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  /* ← REDUCIDO: De 18px a 14px */
+  letter-spacing: 1px;
+  fill: rgba(250, 250, 250, 1.0);
+  animation: rotateText 10s linear infinite;
+  transform-origin: 50px 50px;
+}
+
+/* Animación de rotación infinita para texto circular */
+@keyframes rotateText {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Contenedor que envuelve texto y subrayado */
+.navbar-text-container {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.navbar-text-mask {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  padding-bottom: 13px;
+}
+
+.navbar-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: rgba(250, 250, 250, 1.0);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  line-height: 1;
+  /* ← AGREGADO: Elimina espacio vertical extra */
+  padding: 0;
+  /* ← AGREGADO: Sin padding interno */
+  margin: 0;
+  /* ← AGREGADO: Sin margin interno */
+}
+
+/* Contenedor interno para animar solo texto e icono */
+.navbar-text>* {
+  opacity: 1;
+  /* ← CAMBIADO: Visible desde el inicio */
+  transform: translateY(40px);
+  /* ← AUMENTADO: De 20px a 40px */
+  position: relative;
+  z-index: 1;
+  /* ← DEBAJO del subrayado */
+}
+
+/* Animación de máscara para revelar texto */
+@keyframes revealText {
+  0% {
+    clip-path: inset(0 0 calc(100% - 1px) 0);
+    /* ← AJUSTADO: Llega hasta el subrayado */
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+    /* ← VISIBLE: Todo descubierto */
+  }
+}
+
+/* Aplicar animación de máscara al texto e icono */
+.navbar-text>* {
+  animation:
+    slideUpFromBottom 0.4s ease-out 0.6s forwards;
+  /* ← ANTES: De 0.7s a 0.6s */
+}
+
+/* Subrayado - ahora es un elemento normal del flex, NO absolute */
+.navbar-underline {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(250, 250, 250, 1.0);
+  opacity: 0;
+  animation: slideInFromLeft 0.4s ease-out 0.3s forwards;
+  z-index: 10;
+}
+
+/* Animación de carga para el subrayado */
+@keyframes slideInFromLeft {
+  0% {
+    width: 0;
+    /* ← COMIENZA: Sin subrayado */
+    opacity: 0;
+    /* ← COMIENZA: Transparente */
+  }
+
+  100% {
+    width: 100%;
+    /* ← TERMINA: Ancho completo */
+    opacity: 1;
+    /* ← TERMINA: Totalmente visible */
+  }
+}
+
+/* Animación para texto e icono de abajo hacia arriba */
+@keyframes slideUpFromBottom {
+  0% {
+    opacity: 1;
+    /* ← CAMBIADO: Visible desde el inicio */
+    transform: translateY(40px);
+    /* ← COMIENZA: 40px abajo */
+  }
+
+  100% {
+    opacity: 1;
+    /* ← TERMINA: Visible */
+    transform: translateY(0);
+    /* ← TERMINA: Posición normal */
+  }
+}
+
+.navbar-text:hover {
+  color: rgba(250, 250, 250, 0.7);
+}
+
+/* Material Symbols */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+  font-size: 1rem;
+  color: rgba(250, 250, 250, 1.0);
+  transition: color 0.2s ease;
+}
+
+.navbar:hover .material-symbols-outlined {
+  color: rgba(250, 250, 250, 0.7);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    max-width: 100%;
+    /* ← MÓVIL: Sin límite de ancho */
+    padding: 0 20px;
+    /* ← MÓVIL: Misma márgenes que content-container */
+  }
+
+  .content-container {
+    max-width: 100%;
+    /* ← MÓVIL: Sin límite de ancho */
+    padding: 0 20px;
+    /* ← MÓVIL: Pequeños márgenes laterales */
+  }
+
+  .prueba-text {
+    font-size: 4rem;
+    top: 25%;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    top: 30%;
+  }
+}
+
+.text-part-1 {
+  display: inline-block;
+  animation: slideUpText 0.7s ease-in-out 0.5s forwards;
+}
+
+.text-part-2 {
+  display: inline-block;
+  margin-right: -0.06em;
+  animation: slideUpText 0.8s ease-in-out 0.65s forwards;
+}
+
+@keyframes slideUpText {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes slideUpSubtitle {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #161616;
+  z-index: 9999;
+  /* ← MÁXIMO: Por encima de absolutamente todo */
+  animation: revealFromTop 1.6s ease-in-out forwards;
+}
+
+@keyframes revealFromTop {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.scroll-indicator {
+  position: absolute;
+  top: 75%;
+  right: 20px;
+  /* Ajustado para ser simétrico con el bloque de texto izquierdo */
+  z-index: 100;
+  opacity: 0;
+  animation: slideInFromRight 0.8s ease-out 1.5s forwards;
+}
+
+.scroll-indicator svg {
+  width: 30px;
+  height: 100px;
+  display: block;
+}
+
+.scroll-indicator svg path {
+  fill: none;
+  /* Asegura que no tenga relleno negro accidental */
+}
+
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

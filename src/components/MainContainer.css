@@ -1,0 +1,25 @@
+.main-container {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - 2vh);
+  margin: 2vh 0 0 0;
+  background: #161616;
+  background-image:
+    linear-gradient(to right, #1f1f1f 1px, transparent 1px),
+    linear-gradient(to bottom, #1f1f1f 1px, transparent 1px);
+  background-size: 150px 150px;
+  border: none;
+  border-radius: 0;
+  z-index: 10;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    margin: 1vh 0 0 0;
+    width: 100vw;
+    height: calc(100vh - 1vh);
+    background-size: 80px 80px;
+    /* ← AGREGADO: Grilla más pequeña en móvil */
+  }
+}
