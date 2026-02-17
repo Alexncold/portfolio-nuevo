@@ -108,13 +108,14 @@ button:focus-visible {
   /* Cambiado de absolute a relative */
   text-align: right;
   /* Alineación de texto a la derecha */
-  opacity: 1;
-  /* Make visible by default or let reveal animation handle it */
+  opacity: 0;
+  /* Hidden initially for animation */
   margin-top: -75px;
   /* ← UN POCO MÁS CERCANO */
   margin-right: -10px;
   /* ← AJUSTE FINO: Alinear con el título */
-  /* animation removed - handled by JS scroll */
+  animation: slideUpSubtitle 0.6s ease-out 0.8s forwards;
+  /* Initial load animation */
   width: 100%;
   /* Ocupa el ancho del contenedor (que dicta el título) */
 }

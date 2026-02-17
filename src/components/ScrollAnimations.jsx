@@ -11,7 +11,7 @@ export default function ScrollAnimations() {
 
   useEffect(() => {
     const assignRefs = () => {
-      titleRef.current = document.querySelector('.title-group')
+      titleRef.current = document.querySelector('.prueba-text')
       subtitleRef.current = document.querySelector('.subtitle')
       arrowRef.current = document.querySelector('.scroll-indicator')
       contentContainerRef.current = document.querySelector('.content-container')
@@ -23,7 +23,7 @@ export default function ScrollAnimations() {
         const computedStyle = window.getComputedStyle(titleRef.current)
         initialStyles.current.title = {
           opacity: computedStyle.opacity || '1',
-          transform: computedStyle.transform || 'translate(-50%, -50%)'
+          transform: computedStyle.transform || 'none'
         }
       }
       if (subtitleRef.current && !initialStyles.current.subtitle) {
@@ -62,11 +62,11 @@ export default function ScrollAnimations() {
       if (scrollProgress > 0) {
         // 1. Título principal (PRIMERO en desaparecer)
         if (titleRef.current && initialStyles.current.title) {
-          const titleProgress = Math.min(scrollProgress / 0.6, 1) // SLOWER: 0% - 60%
+          const titleProgress = Math.min(scrollProgress / 0.4, 1) // FASTER: 0% - 40%
           const titleOpacity = Math.max(1 - titleProgress, 0)
-          const titleBlur = titleProgress * 10 // 0px to 10px blur
+          const titleBlur = titleProgress * 10
           const baseTransform = initialStyles.current.title.transform === 'none' ? '' : initialStyles.current.title.transform
-          const titleTransform = `${baseTransform} translateY(-${titleProgress * 100}px)`
+          const titleTransform = `${baseTransform} translateY(-${titleProgress * 60}px)`
 
           titleRef.current.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out, filter 0.3s ease-out'
           titleRef.current.style.opacity = titleOpacity
@@ -76,13 +76,17 @@ export default function ScrollAnimations() {
 
         // 2. Subtítulo (SEGUNDO)
         if (subtitleRef.current) {
-          const subtitleProgress = Math.min(Math.max((scrollProgress - 0.1) / 0.6, 0), 1) // SLOWER: 10% - 70%
+          const subtitleProgress = Math.min(Math.max((scrollProgress - 0.2) / 0.5, 0), 1) // DELAYED: 20% - 70%
           const subtitleOpacity = Math.max(1 - subtitleProgress, 0)
-          const subtitleTransform = `translateY(-${subtitleProgress * 80}px)`
+          const subtitleBlur = subtitleProgress * 8 // 0px to 8px blur
+          const baseTransform = initialStyles.current.subtitle?.transform === 'none' ? '' : initialStyles.current.subtitle?.transform || ''
+          const subtitleTransform = `${baseTransform} translateY(-${subtitleProgress * 80}px)`.trim()
 
-          subtitleRef.current.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out'
+          subtitleRef.current.style.animation = 'none' // Release CSS lock
+          subtitleRef.current.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out, filter 0.3s ease-out'
           subtitleRef.current.style.opacity = subtitleOpacity
           subtitleRef.current.style.transform = subtitleTransform
+          subtitleRef.current.style.filter = `blur(${subtitleBlur}px)`
         }
 
         // 3. Bloques de texto (Bold vs Light Parallax)
@@ -173,8 +177,11 @@ export default function ScrollAnimations() {
         }
 
         if (subtitleRef.current && initialStyles.current.subtitle) {
-          subtitleRef.current.style.opacity = initialStyles.current.subtitle.opacity
+          subtitleRef.current.style.opacity = '1' // Force opacity to 1 as initialStyles might capture 0
           subtitleRef.current.style.transform = initialStyles.current.subtitle.transform
+          subtitleRef.current.style.filter = 'blur(0px)'
+          // Do NOT reset animation to '' to avoid re-triggering the entrance animation
+          subtitleRef.current.style.animation = 'none'
         }
 
         if (arrowRef.current) {
