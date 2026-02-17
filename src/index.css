@@ -29,8 +29,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -110,12 +108,13 @@ button:focus-visible {
   /* Cambiado de absolute a relative */
   text-align: right;
   /* Alineación de texto a la derecha */
-  opacity: 0;
+  opacity: 1;
+  /* Make visible by default or let reveal animation handle it */
   margin-top: -75px;
   /* ← UN POCO MÁS CERCANO */
   margin-right: -10px;
   /* ← AJUSTE FINO: Alinear con el título */
-  animation: slideUpSubtitle 0.6s ease-out 1.2s forwards;
+  /* animation removed - handled by JS scroll */
   width: 100%;
   /* Ocupa el ancho del contenedor (que dicta el título) */
 }
@@ -209,7 +208,6 @@ button:focus-visible {
   transform: translateX(-50%);
   width: 100%;
   max-width: 1366px;
-  /* ← CAMBIADO: De 1024px a 1366px */
   height: 100vh;
   pointer-events: none;
   /* No interferir con eventos del mouse */
@@ -237,11 +235,12 @@ button:focus-visible {
   width: 100%;
   /* ← ANCHO DEL CONTENEDOR */
   max-width: 1366px;
-  /* ← CAMBIADO: De 1024px a 1366px */
   height: 90px;
   /* ← DUPLICADO: De 45px a 90px */
   pointer-events: auto;
   /* Permitir interacción */
+  padding: 0 20px;
+  /* ← Padding para no pegar a los bordes */
 }
 
 /* Logo circular del navbar */
@@ -448,15 +447,15 @@ button:focus-visible {
 
 @media (max-width: 768px) {
   .navbar {
-    max-width: 100%;
-    /* ← MÓVIL: Sin límite de ancho */
+    width: 100%;
+    /* ← MÓVIL: Ancho completo */
     padding: 0 20px;
     /* ← MÓVIL: Misma márgenes que content-container */
   }
 
   .content-container {
-    max-width: 100%;
-    /* ← MÓVIL: Sin límite de ancho */
+    width: 100%;
+    /* ← MÓVIL: Ancho completo */
     padding: 0 20px;
     /* ← MÓVIL: Pequeños márgenes laterales */
   }
@@ -509,7 +508,7 @@ button:focus-visible {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   background-color: #161616;
   z-index: 9999;
@@ -534,7 +533,7 @@ button:focus-visible {
   /* Ajustado para ser simétrico con el bloque de texto izquierdo */
   z-index: 100;
   opacity: 0;
-  animation: slideInFromRight 0.8s ease-out 1.5s forwards;
+  animation: slideInFromRight 0.8s ease-out 1.0s forwards;
 }
 
 .scroll-indicator svg {

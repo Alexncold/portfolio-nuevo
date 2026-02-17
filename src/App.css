@@ -10,8 +10,53 @@ body {
   background: #161616;
   color: #ffffff;
   overflow-x: hidden;
-  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilos para las secciones */
+
+.section {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.first-section {
+  /* La primera sección mantiene todo el comportamiento original */
+  position: relative;
+  overflow: hidden;
+}
+
+.second-section {
+  /* Segunda sección con fondo oscuro */
+  background-color: #161616;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.lorem-container {
+  max-width: 1200px;
+  padding: 0 40px;
+  text-align: center;
+}
+
+.lorem-text {
+  font-family: 'Instrument Serif', serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgba(250, 250, 250, 1.0);
+  line-height: 1.2;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .lorem-text {
+    font-size: 2.5rem;
+  }
+  
+  .lorem-container {
+    padding: 0 20px;
+  }
 }

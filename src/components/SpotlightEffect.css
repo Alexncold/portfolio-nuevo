@@ -1,10 +1,10 @@
 /* Contenedor principal del efecto spotlight */
 .spotlight-container {
-  position: fixed;
-  top: 2vh; /* ← Comienza donde empieza main-container */
+  position: absolute;
+  top: 2vh;
   left: 0;
   width: 100vw;
-  height: calc(100vh - 2vh); /* ← Ahora es correcto porque top: 2vh */
+  height: calc(100% - 2vh);
   pointer-events: none; /* No interferir con eventos del mouse */
   z-index: 50; /* ← AUMENTADO: Mayor que MainContainer (z-index: 10) */
   overflow: hidden;
@@ -129,7 +129,7 @@
 
   .spotlight-container {
     top: 2vh; /* ← AJUSTADO: Igual que versión desktop */
-    height: calc(100vh - 2vh); /* ← AJUSTADO: Igual que versión desktop */
+    height: calc(100% - 2vh); /* ← AJUSTADO: Igual que versión desktop */
   }
 }
 
