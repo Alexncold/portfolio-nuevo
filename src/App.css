@@ -23,17 +23,19 @@ body {
 }
 
 .first-section {
-  /* La primera sección mantiene todo el comportamiento original */
+  /* El grid y spotlight son fixed, esta sección solo define el espacio de scroll */
   position: relative;
   overflow: hidden;
 }
 
 .second-section {
-  /* Segunda sección con fondo oscuro */
+  /* Cortina: sube por encima del fondo fijo de la primera sección */
   background-color: #161616;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 20;
 }
 
 .lorem-container {
@@ -55,7 +57,7 @@ body {
   .lorem-text {
     font-size: 2.5rem;
   }
-  
+
   .lorem-container {
     padding: 0 20px;
   }

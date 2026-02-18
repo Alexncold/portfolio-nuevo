@@ -179,8 +179,41 @@ button:focus-visible {
   font-weight: 300;
   color: rgba(250, 250, 250, 1.0);
   position: relative;
-  opacity: 1;
   line-height: 1.2;
+}
+
+/* --- Slide-up animations for section texts --- */
+.section-text-1 {
+  opacity: 0;
+  transform: translateY(120px);
+  animation: sectionTextSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-play-state: paused;
+}
+
+.section-text-1.is-visible {
+  animation-play-state: running;
+}
+
+.section-text-2 {
+  opacity: 0;
+  transform: translateY(220px);
+  animation: sectionTextSlideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+  animation-play-state: paused;
+}
+
+.section-text-2.is-visible {
+  animation-play-state: running;
+}
+
+@keyframes sectionTextSlideUp {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .section-avatar-container {
@@ -199,6 +232,29 @@ button:focus-visible {
   width: 120px;
   height: 120px;
 }
+
+/* --- Reveal Animation (Marker Effect) --- */
+.section-mask-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: drawLogoMask 1.8s ease-out forwards;
+  animation-play-state: paused;
+}
+
+.section-mask-path.is-visible {
+  animation-play-state: running;
+}
+
+.section-mask-final {
+  opacity: 0;
+  animation: finishLogoReveal 0.01s linear 1.78s forwards;
+  animation-play-state: paused;
+}
+
+.section-mask-final.is-visible {
+  animation-play-state: running;
+}
+
 
 .section-avatar-text {
   font-family: 'Source Sans 3', sans-serif;

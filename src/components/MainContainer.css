@@ -1,5 +1,5 @@
 .main-container {
-  position: absolute;
+  position: fixed;
   top: 2vh;
   left: 0;
   width: 100vw;
@@ -11,7 +11,7 @@
   background-size: 150px 150px;
   border: none;
   border-radius: 0;
-  z-index: 10;
+  z-index: 1;
   overflow: hidden;
 }
 

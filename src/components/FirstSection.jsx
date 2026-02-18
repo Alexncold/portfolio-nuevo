@@ -92,7 +92,7 @@ export default function FirstSection() {
           </div>
         </div>
         <div className="location-text-light">
-          EN UNA MAGICA<br />PROVINCIA<br />DEL NORTE
+          EN UNA MÁGICA<br />PROVINCIA<br />DEL NORTE
         </div>
         <div className="scroll-indicator">
           <svg width="30" height="100" viewBox="0 0 30 100" fill="none" xmlns="http://www.w3.org/2000/svg">
