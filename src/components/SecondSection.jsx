@@ -33,6 +33,11 @@ export default function SecondSection() {
         </p>
 
         <div className="section-content-row">
+          {/* Texto lateral izquierdo */}
+          <p className={`section-side-text ${isVisible ? 'is-visible' : ''}`}>
+            Soy Ale, trabajo<br />como UXD hace más<br />de 5 años
+          </p>
+
           {/* Avatar circular */}
           <div className="section-avatar-container">
             <svg viewBox="0 0 270 270" className="section-avatar-svg">
