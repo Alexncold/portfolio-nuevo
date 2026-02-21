@@ -96,7 +96,30 @@ export default function FirstSection() {
         </div>
         <div className="scroll-indicator">
           <svg width="30" height="100" viewBox="0 0 30 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 0L15 98M15 98L11 94M15 98L19 94" stroke="white" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+            <path
+              className="arrow-line"
+              d="M15 0L15 98"
+              pathLength="1"
+              stroke="white"
+              strokeWidth="1"
+              strokeLinecap="round"
+            />
+            <path
+              className="arrow-tip-left"
+              d="M15 98L11 94"
+              pathLength="1"
+              stroke="white"
+              strokeWidth="1"
+              strokeLinecap="round"
+            />
+            <path
+              className="arrow-tip-right"
+              d="M15 98L19 94"
+              pathLength="1"
+              stroke="white"
+              strokeWidth="1"
+              strokeLinecap="round"
+            />
           </svg>
         </div>
       </div>

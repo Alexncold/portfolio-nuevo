@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 export default function SecondSection() {
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [isArrowDrawn, setIsArrowDrawn] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -22,6 +23,15 @@ export default function SecondSection() {
     }
   }, [isVisible])
 
+  useEffect(() => {
+    if (isVisible) {
+      const timer = setTimeout(() => {
+        setIsArrowDrawn(true)
+      }, 1800) // Trigger at 1.8s during the 3.5s path animation
+      return () => clearTimeout(timer)
+    }
+  }, [isVisible])
+
   return (
     <section className="section second-section" ref={sectionRef}>
       <div className="lorem-container section-text-block">
@@ -31,6 +41,58 @@ export default function SecondSection() {
         <p className={`section-text section-text-2 ${isVisible ? 'is-visible' : ''}`}>
           TE INVITO A <span className="bold-text">CONOCERME</span>
         </p>
+
+        <svg
+          className={`section-connection-arrow ${isVisible ? 'is-visible' : ''} ${isArrowDrawn ? 'arrowhead-visible' : ''}`}
+          viewBox="0 0 1200 700"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+
+          <defs>
+            <marker
+              id="section-connection-arrowhead"
+              markerWidth="14"
+              markerHeight="14"
+              refX="10"
+              refY="7"
+              orient="auto"
+              markerUnits="userSpaceOnUse"
+            >
+              <path
+                className="section-connection-arrowhead-side section-connection-arrowhead-side-1"
+                d="M 0 0 L 14 7"
+                pathLength="1"
+                fill="none"
+                stroke="rgba(250, 250, 250, 1.0)"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                className="section-connection-arrowhead-side section-connection-arrowhead-side-2"
+                d="M 14 7 L 0 14"
+                pathLength="1"
+                fill="none"
+                stroke="rgba(250, 250, 250, 1.0)"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </marker>
+          </defs>
+          <path
+            className="section-connection-arrow-body"
+            d="M 713 133 C 1135 86 1061 211 916 210 C 786 215 506 101 357 228 C 315 268 306 326 322 371"
+            pathLength="1"
+            fill="none"
+            stroke="rgba(250, 250, 250, 1.0)"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            markerEnd="url(#section-connection-arrowhead)"
+          />
+        </svg>
 
         <div className="section-content-row">
           {/* Texto lateral izquierdo */}
@@ -100,6 +162,16 @@ export default function SecondSection() {
                 strokeWidth="0.5"
               />
             </svg>
+          </div>
+
+          {/* Texto lateral derecho y lista de habilidades */}
+          <div className="section-side-text-right">
+            <p className="side-text-title">Pero también soy</p>
+            <ul className="side-text-list">
+              <li><span className="item-num">(01)</span> SPEEDWALKER</li>
+              <li><span className="item-num">(02)</span> DUNGEON MASTER</li>
+              <li><span className="item-num">(03)</span> TRAINED CHEF</li>
+            </ul>
           </div>
         </div>
       </div>

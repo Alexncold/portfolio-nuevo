@@ -216,6 +216,80 @@ button:focus-visible {
   }
 }
 
+.section-connection-arrow {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%) translateX(-170px);
+  width: 780px;
+  height: 520px;
+  pointer-events: none;
+  z-index: 0;
+  --section-arrow-duration: 3.5s;
+}
+
+.section-connection-arrow .section-connection-arrow-body {
+  vector-effect: non-scaling-stroke;
+  stroke: rgba(250, 250, 250, 1.0);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+}
+
+.section-connection-arrow.is-visible .section-connection-arrow-body {
+  animation: sectionArrowAppearDraw var(--section-arrow-duration) cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes sectionArrowAppearDraw {
+  0% {
+    opacity: 0;
+    stroke-dashoffset: 1;
+  }
+
+  15% {
+    opacity: 1;
+    stroke-dashoffset: 1;
+  }
+
+  60% {
+    opacity: 1;
+    stroke-dashoffset: 0.3;
+    /* Smooth fast phase */
+  }
+
+  100% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+    /* Elegant finish */
+  }
+}
+
+.section-connection-arrow .section-connection-arrowhead-side {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.section-connection-arrow:not(.arrowhead-visible) .section-connection-arrowhead-side {
+  animation: none;
+}
+
+.section-connection-arrow.arrowhead-visible .section-connection-arrowhead-side-1 {
+  animation: arrowheadSideDraw 0.2s ease-out forwards;
+}
+
+.section-connection-arrow.arrowhead-visible .section-connection-arrowhead-side-2 {
+  animation: arrowheadSideDraw 0.2s ease-out 0.1s forwards;
+}
+
+@keyframes arrowheadSideDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 .section-avatar-container {
   margin-top: 130px;
   display: flex;
@@ -318,6 +392,66 @@ button:focus-visible {
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+.section-side-text-right {
+  position: absolute;
+  right: -385px;
+  top: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.side-text-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 3.8rem;
+  font-weight: 700;
+  color: rgba(250, 250, 250, 1.0);
+  margin-bottom: 25px;
+  position: relative;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.side-text-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -12px;
+  width: 100%;
+  height: 1px;
+  background: rgba(250, 250, 250, 1.0);
+}
+
+.side-text-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+}
+
+.side-text-list li {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 2.1rem;
+  font-weight: 400;
+  color: #A0A0A0;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  /* Reduced slightly from 25px */
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  /* Increased spacing between number and text */
+  line-height: 1;
+}
+
+.item-num {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  position: relative;
+  top: 1px;
+  font-weight: 400;
+  color: #A0A0A0;
 }
 
 .location-text-light {
@@ -690,7 +824,7 @@ button:focus-visible {
   /* Ajustado para ser simétrico con el bloque de texto izquierdo */
   z-index: 100;
   opacity: 0;
-  animation: slideInFromRight 0.8s ease-out 1.0s forwards;
+  animation: slideInFromRight 0.5s ease-out 0.8s forwards;
 }
 
 .scroll-indicator svg {
@@ -702,6 +836,36 @@ button:focus-visible {
 .scroll-indicator svg path {
   fill: none;
   /* Asegura que no tenga relleno negro accidental */
+}
+
+.scroll-indicator .arrow-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: drawArrowLine 0.4s ease-out 1.0s forwards;
+}
+
+.scroll-indicator .arrow-tip-left {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: drawArrowTip 0.2s ease-out 1.4s forwards;
+}
+
+.scroll-indicator .arrow-tip-right {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: drawArrowTip 0.2s ease-out 1.4s forwards;
+}
+
+@keyframes drawArrowLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes drawArrowTip {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 @keyframes slideInFromRight {
