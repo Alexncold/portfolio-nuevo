@@ -396,11 +396,23 @@ button:focus-visible {
 
 .section-side-text-right {
   position: absolute;
-  right: -385px;
+  right: -400px;
   top: 220px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  text-align: left;
+}
+
+.side-text-title-mask {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 12px;
+  /* Just enough for the underline */
+  margin-bottom: 15px;
+  width: fit-content;
+  margin-top: -10px;
+  /* Offset to keep position similar */
 }
 
 .side-text-title {
@@ -408,20 +420,44 @@ button:focus-visible {
   font-size: 3.8rem;
   font-weight: 700;
   color: rgba(250, 250, 250, 1.0);
-  margin-bottom: 25px;
+  margin: 0;
   position: relative;
   white-space: nowrap;
   line-height: 1.2;
+  transform: translateY(125%);
+  /* Increased to ensure it's fully outside the mask */
+  opacity: 1;
 }
 
-.side-text-title::after {
-  content: '';
+.side-text-title-mask.is-visible .side-text-title {
+  animation: slideUpFromBottom 0.6s ease-out 2.0s forwards;
+  /* Reduced from 2.5s */
+}
+
+.side-text-title-underline {
   position: absolute;
   left: 0;
-  bottom: -12px;
-  width: 100%;
+  bottom: 0;
+  width: 0;
   height: 1px;
   background: rgba(250, 250, 250, 1.0);
+  opacity: 1;
+  /* Always opaque when animating width */
+}
+
+.side-text-title-mask.is-visible .side-text-title-underline {
+  animation: drawUnderlineHorizontal 0.5s ease-out 1.5s forwards;
+  /* Reduced from 2.0s */
+}
+
+@keyframes drawUnderlineHorizontal {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
 }
 
 .side-text-list {
@@ -437,21 +473,48 @@ button:focus-visible {
   color: #A0A0A0;
   text-transform: uppercase;
   margin-bottom: 20px;
-  /* Reduced slightly from 25px */
   display: flex;
   align-items: flex-start;
-  gap: 16px;
-  /* Increased spacing between number and text */
   line-height: 1;
+  transition: color 0.3s ease;
+  white-space: nowrap;
 }
 
 .item-num {
   font-family: 'Source Sans 3', sans-serif;
-  font-size: 1.1rem;
-  position: relative;
-  top: 1px;
+  font-size: 1.3rem;
   font-weight: 400;
   color: #A0A0A0;
+  margin-right: 16px;
+  display: inline-block;
+  line-height: 1;
+  transform: translateY(3px);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.char {
+  display: inline-block;
+  opacity: 0;
+  /* No opacity transition as requested */
+}
+
+.side-text-list li.is-visible .char {
+  animation: charReveal 0.01s linear forwards;
+}
+
+@keyframes charReveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.side-text-list li:hover .char,
+.side-text-list li:hover .item-num {
+  color: #fafafa;
 }
 
 .location-text-light {

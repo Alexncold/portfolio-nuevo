@@ -166,15 +166,48 @@ export default function SecondSection() {
 
           {/* Texto lateral derecho y lista de habilidades */}
           <div className="section-side-text-right">
-            <p className="side-text-title">Pero también soy</p>
+            <div className={`side-text-title-mask ${isVisible ? 'is-visible' : ''}`}>
+              <p className="side-text-title">Pero también soy</p>
+              <div className="side-text-title-underline"></div>
+            </div>
             <ul className="side-text-list">
-              <li><span className="item-num">(01)</span> SPEEDWALKER</li>
-              <li><span className="item-num">(02)</span> DUNGEON MASTER</li>
-              <li><span className="item-num">(03)</span> TRAINED CHEF</li>
+              <li className={isVisible ? 'is-visible' : ''}>
+                <span className="item-num">
+                  {splitText("(01)", 2.6, isVisible)}
+                </span>
+                {splitText(" SPEEDWALKER", 2.7, isVisible)}
+              </li>
+              <li className={isVisible ? 'is-visible' : ''}>
+                <span className="item-num">
+                  {splitText("(02)", 3.1, isVisible)}
+                </span>
+                {splitText(" DUNGEON MASTER", 3.2, isVisible)}
+              </li>
+              <li className={isVisible ? 'is-visible' : ''}>
+                <span className="item-num">
+                  {splitText("(03)", 3.6, isVisible)}
+                </span>
+                {splitText(" TRAINED CHEF", 3.7, isVisible)}
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </section>
   )
+}
+
+// Helper to split text for staggered animation
+function splitText(text, baseDelay, isVisible) {
+  return text.split('').map((char, index) => (
+    <span
+      key={index}
+      className="char"
+      style={{
+        animationDelay: isVisible ? `${baseDelay + (index * 0.03)}s` : '0s'
+      }}
+    >
+      {char === ' ' ? '\u00A0' : char}
+    </span>
+  ));
 }
