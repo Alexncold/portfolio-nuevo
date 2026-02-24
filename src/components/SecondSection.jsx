@@ -4,6 +4,10 @@ export default function SecondSection() {
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
   const [isArrowDrawn, setIsArrowDrawn] = useState(false)
+  const [isSpeedwalkerHovered, setIsSpeedwalkerHovered] = useState(false)
+  const [isDungeonMasterHovered, setIsDungeonMasterHovered] = useState(false)
+  const [isTrainedChefHovered, setIsTrainedChefHovered] = useState(false)
+  const [walkFrame, setWalkFrame] = useState(0)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -31,6 +35,46 @@ export default function SecondSection() {
       return () => clearTimeout(timer)
     }
   }, [isVisible])
+
+  // Shared animation frame logic
+  useEffect(() => {
+    let interval;
+    if (isSpeedwalkerHovered || isDungeonMasterHovered || isTrainedChefHovered) {
+      interval = setInterval(() => {
+        setWalkFrame(prev => (prev === 0 ? 1 : 0));
+      }, 400); // 400ms for a more relaxed 2-frame cartoon feel
+    } else {
+      setWalkFrame(0);
+    }
+    return () => clearInterval(interval);
+  }, [isSpeedwalkerHovered, isDungeonMasterHovered, isTrainedChefHovered]);
+
+  const getAvatarImage = () => {
+    if (isSpeedwalkerHovered) {
+      return walkFrame === 0
+        ? "https://iili.io/qKGYd11.png"
+        : "https://iili.io/qKGY2rF.png";
+    }
+    if (isDungeonMasterHovered) {
+      return walkFrame === 0
+        ? "https://iili.io/qKG7pzQ.png"
+        : "https://iili.io/qKGY9LB.png";
+    }
+    if (isTrainedChefHovered) {
+      return walkFrame === 0
+        ? "https://iili.io/qKG7t5b.png"
+        : "https://iili.io/qKVoalj.png";
+    }
+    return "https://i.ibb.co/HTjyR6Rg/avatar-big.png";
+  };
+
+  const getAvatarTransform = () => {
+    if (isDungeonMasterHovered) {
+      // Rotate -15deg (left) for frame 0, 15deg (right) for frame 1 around center (135, 135)
+      return walkFrame === 0 ? "rotate(-15 135 135)" : "rotate(15 135 135)";
+    }
+    return "";
+  };
 
   return (
     <section className="section second-section" ref={sectionRef}>
@@ -140,13 +184,14 @@ export default function SecondSection() {
                 strokeWidth="0.5"
               />
               <image
-                href="https://i.ibb.co/HTjyR6Rg/avatar-big.png"
+                href={getAvatarImage()}
                 x="75"
                 y="75"
                 width="120"
                 height="120"
                 className="section-avatar-image"
                 mask="url(#section-avatar-mask)"
+                transform={getAvatarTransform()}
               />
               <text className="section-avatar-text" fill="rgba(250, 250, 250, 1.0)" fontSize="13" letterSpacing="0.4" dominantBaseline="middle">
                 <textPath href="#section-circle-text" textLength="660" lengthAdjust="spacing">
@@ -171,19 +216,31 @@ export default function SecondSection() {
               <div className="side-text-title-underline"></div>
             </div>
             <ul className="side-text-list">
-              <li className={isVisible ? 'is-visible' : ''}>
+              <li
+                className={isVisible ? 'is-visible' : ''}
+                onMouseEnter={() => setIsSpeedwalkerHovered(true)}
+                onMouseLeave={() => setIsSpeedwalkerHovered(false)}
+              >
                 <span className="item-num">
                   {splitText("(01)", 2.6, isVisible)}
                 </span>
                 {splitText(" SPEEDWALKER", 2.7, isVisible)}
               </li>
-              <li className={isVisible ? 'is-visible' : ''}>
+              <li
+                className={isVisible ? 'is-visible' : ''}
+                onMouseEnter={() => setIsDungeonMasterHovered(true)}
+                onMouseLeave={() => setIsDungeonMasterHovered(false)}
+              >
                 <span className="item-num">
                   {splitText("(02)", 3.1, isVisible)}
                 </span>
                 {splitText(" DUNGEON MASTER", 3.2, isVisible)}
               </li>
-              <li className={isVisible ? 'is-visible' : ''}>
+              <li
+                className={isVisible ? 'is-visible' : ''}
+                onMouseEnter={() => setIsTrainedChefHovered(true)}
+                onMouseLeave={() => setIsTrainedChefHovered(false)}
+              >
                 <span className="item-num">
                   {splitText("(03)", 3.6, isVisible)}
                 </span>
