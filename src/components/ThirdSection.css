@@ -1,0 +1,77 @@
+.third-section {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background: transparent;
+    /* Revela el grid fijo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    /* Por encima del fondo fijo, pero se comporta como scroll normal */
+    overflow: hidden;
+}
+
+.third-content-container {
+    width: 100%;
+    max-width: 1366px;
+    padding: 0 40px;
+    position: relative;
+}
+
+.third-title-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.third-big-title {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 15rem;
+    /* Letras muy grandes */
+    font-weight: 900;
+    color: rgba(250, 250, 250, 1.0);
+    line-height: 0.85;
+    margin: 0;
+    text-transform: none;
+}
+
+.title-line-1 {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.title-line-2 {
+    display: block;
+    margin-left: 250px;
+    /* Sangría según la captura */
+}
+
+.small-info-text {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    /* Alineado abajo cerca de la sangría */
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: rgba(250, 250, 250, 0.7);
+    line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+    .third-big-title {
+        font-size: 6rem;
+    }
+
+    .title-line-2 {
+        margin-left: 50px;
+    }
+
+    .small-info-text {
+        font-size: 0.8rem;
+        position: relative;
+        margin-bottom: 20px;
+    }
+}

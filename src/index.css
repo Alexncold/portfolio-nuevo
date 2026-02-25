@@ -868,6 +868,7 @@ button:focus-visible {
   z-index: 9999;
   /* ← MÁXIMO: Por encima de absolutamente todo */
   animation: revealFromTop 1.6s ease-in-out forwards;
+  pointer-events: none;
 }
 
 @keyframes revealFromTop {
