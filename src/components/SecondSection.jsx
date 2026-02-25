@@ -2,14 +2,8 @@ import { useEffect, useRef, useState, useMemo } from 'react'
 
 const SPEEDWALKER_FRAMES = [
   "https://i.ibb.co/wrFPCPc6/1.png",
-  "https://i.ibb.co/whtr9wGW/2.png",
-  "https://i.ibb.co/DHZf3ynH/3.png",
   "https://i.ibb.co/11tXWPd/4.png",
-  "https://i.ibb.co/DfZhDKF1/5.png",
-  "https://i.ibb.co/DPTmYdFB/6.png",
   "https://i.ibb.co/zTKQS4BP/7.png",
-  "https://i.ibb.co/fd7Gzj4r/8.png",
-  "https://i.ibb.co/V0QDNF43/9.png",
   "https://i.ibb.co/ZprcRCSj/10.png"
 ];
 
@@ -77,19 +71,34 @@ export default function SecondSection() {
 
   // Lógica de animación optimizada
   useEffect(() => {
-    let interval;
+    let rafId;
     if (hoveredRole) {
       const isSpeedwalker = hoveredRole === 'speedwalker';
-      const maxFrames = isSpeedwalker ? 10 : 2;
+      const maxFrames = isSpeedwalker ? SPEEDWALKER_FRAMES.length : 2;
       const intervalMs = isSpeedwalker ? 100 : 400;
+      let lastTime = performance.now();
+      let accumulator = 0;
 
-      interval = setInterval(() => {
-        setWalkFrame(prev => (prev + 1) % maxFrames);
-      }, intervalMs);
+      const tick = (time) => {
+        const delta = time - lastTime;
+        lastTime = time;
+        accumulator += delta;
+
+        while (accumulator >= intervalMs) {
+          accumulator -= intervalMs;
+          setWalkFrame(prev => (prev + 1) % maxFrames);
+        }
+
+        rafId = requestAnimationFrame(tick);
+      };
+
+      rafId = requestAnimationFrame(tick);
     } else {
       setWalkFrame(0);
     }
-    return () => clearInterval(interval);
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, [hoveredRole]);
 
   const currentAvatarInfo = useMemo(() => {
