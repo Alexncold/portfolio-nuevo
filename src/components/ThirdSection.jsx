@@ -6,7 +6,7 @@ export default function ThirdSection() {
             <div className="third-content-container">
                 <div className="third-title-wrapper">
                     <div className="small-info-text">
-                        (Stack y<br />tecnologías)
+                        (Stack y<br />tecnologias)
                     </div>
                     <h1 className="third-big-title">
                         <span className="title-line-1">Mis</span>

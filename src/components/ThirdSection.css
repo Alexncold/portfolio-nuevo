@@ -28,9 +28,9 @@
 
 .third-big-title {
     font-family: 'Source Sans 3', sans-serif;
-    font-size: 15rem;
+    font-size: 11rem;
     /* Letras muy grandes */
-    font-weight: 900;
+    font-weight: 500;
     color: rgba(250, 250, 250, 1.0);
     line-height: 0.85;
     margin: 0;
@@ -45,14 +45,14 @@
 .title-line-2 {
     display: block;
     margin-left: 250px;
-    /* Sangría según la captura */
+    /* Sangr??a seg??n la captura */
 }
 
 .small-info-text {
     position: absolute;
     left: 0;
     bottom: 0;
-    /* Alineado abajo cerca de la sangría */
+    /* Alineado abajo cerca de la sangr??a */
     font-family: 'Source Sans 3', sans-serif;
     font-size: 1.2rem;
     font-weight: 300;
