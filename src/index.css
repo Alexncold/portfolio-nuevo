@@ -173,6 +173,16 @@ button:focus-visible {
   text-align: center;
 }
 
+/* En segunda secciÃ³n, centramos todo el bloque como una sola unidad */
+.second-section .section-text-block {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  width: 100%;
+  max-width: 1200px;
+}
+
 .section-text {
   font-family: 'Source Sans 3', sans-serif;
   font-size: 1.5rem;
@@ -366,12 +376,16 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
   gap: 60px;
 }
 
 .section-side-text {
   position: absolute;
-  left: -450px;
+  left: auto;
+  right: calc(50% + 280px);
   top: 220px;
   font-family: 'Instrument Serif', serif;
   font-size: 3.8rem;
@@ -397,7 +411,8 @@ button:focus-visible {
 
 .section-side-text-right {
   position: absolute;
-  right: -400px;
+  right: auto;
+  left: calc(50% + 280px);
   top: 220px;
   display: flex;
   flex-direction: column;
