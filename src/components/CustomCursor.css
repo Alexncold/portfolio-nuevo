@@ -48,3 +48,14 @@ button:hover, a:hover, input:hover, textarea:hover, [role="button"]:hover {
 .custom-cursor-dot.hover {
   transform: translate(-50%, -50%) scale(1.5);
 }
+
+
+.custom-cursor-image {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  background: url('/customsecondcursor/custom_cursor_2.png') no-repeat center / contain;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}

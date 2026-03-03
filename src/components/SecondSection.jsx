@@ -269,6 +269,7 @@ export default function SecondSection() {
     }
   }, [isVisible])
 
+
   // Lógica de animación optimizada
   useEffect(() => {
     let rafId;
