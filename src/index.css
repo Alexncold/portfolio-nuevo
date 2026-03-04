@@ -192,6 +192,64 @@ button:focus-visible {
   line-height: 1.2;
 }
 
+.second-corner-icon {
+  position: absolute;
+  top: 44px;
+  right: 44px;
+  width: 56px;
+  height: 56px;
+  z-index: 110;
+  pointer-events: none;
+}
+
+.second-corner-icon-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.second-corner-icon-svg path {
+  fill: none;
+  stroke: rgba(250, 250, 250, 1);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.second-corner-icon.is-visible .second-corner-path-top {
+  animation: secondCornerTopIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+
+.second-corner-icon.is-visible .second-corner-path-bottom {
+  animation: secondCornerBottomIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+
+@keyframes secondCornerTopIn {
+  0% {
+    opacity: 0;
+    transform: translate(18px, -18px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes secondCornerBottomIn {
+  0% {
+    opacity: 0;
+    transform: translate(-18px, 18px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
 /* --- Slide-up animations for section texts --- */
 .section-text-1 {
   opacity: 0;

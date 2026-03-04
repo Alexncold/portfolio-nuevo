@@ -4,35 +4,42 @@ import './CustomCursor.css'
 export default function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [isInSecondSection, setIsInSecondSection] = useState(false)
+  const [isOverThirdCarousel, setIsOverThirdCarousel] = useState(false)
+  const [isMouseDown, setIsMouseDown] = useState(false)
 
   useEffect(() => {
     const handleMouseMove = (e) => {
       setPosition({ x: e.clientX, y: e.clientY })
+
+      const hoveredElement = document.elementFromPoint(e.clientX, e.clientY)
+      if (hoveredElement instanceof Element) {
+        setIsInSecondSection(Boolean(hoveredElement.closest('.second-section')))
+        setIsOverThirdCarousel(Boolean(hoveredElement.closest('.third-carousel')))
+      } else {
+        setIsInSecondSection(false)
+        setIsOverThirdCarousel(false)
+      }
     }
 
     const handleMouseLeave = () => {
       setPosition({ x: -100, y: -100 }) // Esconder cursor cuando sale de la ventana
+      setIsInSecondSection(false)
+      setIsOverThirdCarousel(false)
+      setIsMouseDown(false)
     }
-
-    const secondSection = document.querySelector('.second-section')
-    const handleEnterSecond = () => setIsInSecondSection(true)
-    const handleLeaveSecond = () => setIsInSecondSection(false)
-
-    if (secondSection) {
-      secondSection.addEventListener('mouseenter', handleEnterSecond)
-      secondSection.addEventListener('mouseleave', handleLeaveSecond)
-    }
+    const handleMouseDown = () => setIsMouseDown(true)
+    const handleMouseUp = () => setIsMouseDown(false)
 
     window.addEventListener('mousemove', handleMouseMove)
     window.addEventListener('mouseleave', handleMouseLeave)
+    window.addEventListener('mousedown', handleMouseDown)
+    window.addEventListener('mouseup', handleMouseUp)
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('mouseleave', handleMouseLeave)
-      if (secondSection) {
-        secondSection.removeEventListener('mouseenter', handleEnterSecond)
-        secondSection.removeEventListener('mouseleave', handleLeaveSecond)
-      }
+      window.removeEventListener('mousedown', handleMouseDown)
+      window.removeEventListener('mouseup', handleMouseUp)
     }
   }, [])
 
@@ -41,14 +48,19 @@ export default function CustomCursor() {
       {!isInSecondSection && (
         <>
           <div 
-            className="custom-cursor-circle"
+            className={`custom-cursor-circle ${isOverThirdCarousel ? 'is-carousel-hover' : ''}`}
             style={{
               left: `${position.x}px`,
               top: `${position.y}px`,
             }}
-          />
+          >
+            <div className={`custom-cursor-arrows ${isOverThirdCarousel ? 'is-visible' : ''} ${isOverThirdCarousel && isMouseDown ? 'is-pressed' : ''}`}>
+              <span className="material-symbols-outlined">arrow_back</span>
+              <span className="material-symbols-outlined">arrow_forward</span>
+            </div>
+          </div>
           <div 
-            className="custom-cursor-dot"
+            className={`custom-cursor-dot ${isOverThirdCarousel ? 'is-carousel-hover' : ''}`}
             style={{
               left: `${position.x}px`,
               top: `${position.y}px`,

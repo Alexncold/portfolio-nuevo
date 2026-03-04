@@ -221,8 +221,11 @@ const DEFAULT_AVATAR = "https://i.ibb.co/HTjyR6Rg/avatar-big.png";
 
 export default function SecondSection() {
   const sectionRef = useRef(null)
+  const topHeaderRef = useRef(null)
+  const rightTitleMaskRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
   const [isArrowDrawn, setIsArrowDrawn] = useState(false)
+  const [iconPos, setIconPos] = useState({ x: null, y: null })
 
   // Consolidamos el estado de hover
   const [hoveredRole, setHoveredRole] = useState(null) // null | 'speedwalker' | 'dungeonmaster' | 'chef'
@@ -268,6 +271,44 @@ export default function SecondSection() {
       return () => clearTimeout(timer)
     }
   }, [isVisible])
+
+  useEffect(() => {
+    const updateIconPosition = () => {
+      const section = sectionRef.current
+      const topHeader = topHeaderRef.current
+      const rightTitleMask = rightTitleMaskRef.current
+      if (!section || !topHeader || !rightTitleMask) return
+
+      const sectionRect = section.getBoundingClientRect()
+      const topRect = topHeader.getBoundingClientRect()
+      const rightRect = rightTitleMask.getBoundingClientRect()
+      const halfIcon = 28
+
+      setIconPos({
+        x: rightRect.right - sectionRect.left - halfIcon,
+        y: topRect.top - sectionRect.top - halfIcon,
+      })
+    }
+
+    updateIconPosition()
+    window.addEventListener('resize', updateIconPosition)
+    window.addEventListener('scroll', updateIconPosition, { passive: true })
+
+    const topHeader = topHeaderRef.current
+    const rightTitleMask = rightTitleMaskRef.current
+    const observer = typeof ResizeObserver !== 'undefined'
+      ? new ResizeObserver(() => updateIconPosition())
+      : null
+
+    if (observer && topHeader) observer.observe(topHeader)
+    if (observer && rightTitleMask) observer.observe(rightTitleMask)
+
+    return () => {
+      window.removeEventListener('resize', updateIconPosition)
+      window.removeEventListener('scroll', updateIconPosition)
+      if (observer) observer.disconnect()
+    }
+  }, [])
 
 
   // Lógica de animación optimizada
@@ -331,8 +372,28 @@ export default function SecondSection() {
 
   return (
     <section className="section second-section" ref={sectionRef}>
+      <div
+        className={`second-corner-icon ${isVisible ? 'is-visible' : ''}`}
+        aria-hidden="true"
+        style={
+          iconPos.x != null && iconPos.y != null
+            ? { left: `${iconPos.x}px`, top: `${iconPos.y}px` }
+            : undefined
+        }
+      >
+        <svg viewBox="0 0 100 100" className="second-corner-icon-svg">
+          <path
+            className="second-corner-path second-corner-path-top"
+            d="M 51 10 L 51 28 Q 51 51 71 51 L 90 51"
+          />
+          <path
+            className="second-corner-path second-corner-path-bottom"
+            d="M 10 49 L 29 49 Q 49 49 49 69 L 49 90"
+          />
+        </svg>
+      </div>
       <div className="lorem-container section-text-block">
-        <p className={`section-text section-text-1 ${isVisible ? 'is-visible' : ''}`}>
+        <p ref={topHeaderRef} className={`section-text section-text-1 ${isVisible ? 'is-visible' : ''}`}>
           ANTES DE SEGUIR
         </p>
         <p className={`section-text section-text-2 ${isVisible ? 'is-visible' : ''}`}>
@@ -457,7 +518,7 @@ export default function SecondSection() {
           </div>
 
           <div className="section-side-text-right">
-            <div className={`side-text-title-mask ${isVisible ? 'is-visible' : ''}`}>
+            <div ref={rightTitleMaskRef} className={`side-text-title-mask ${isVisible ? 'is-visible' : ''}`}>
               <p className="side-text-title">Pero también soy</p>
               <div className="side-text-title-underline"></div>
             </div>
