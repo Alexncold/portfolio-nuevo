@@ -76,11 +76,55 @@ export default function ThirdSection() {
         let isDragging = false
         let startX = 0
         let startScrollLeft = 0
+        let velocity = 0
+        let lastMoveTs = 0
+        let inertiaRaf = null
+
+        const stopInertia = () => {
+            if (inertiaRaf) {
+                cancelAnimationFrame(inertiaRaf)
+                inertiaRaf = null
+            }
+        }
+
+        const startInertia = () => {
+            stopInertia()
+            if (Math.abs(velocity) < 0.02) return
+
+            let lastTs = performance.now()
+            const tick = (ts) => {
+                const dt = ts - lastTs
+                lastTs = ts
+
+                const maxScroll = carousel.scrollWidth - carousel.clientWidth
+                if (maxScroll <= 0) return
+
+                carousel.scrollLeft += velocity * dt
+
+                const damping = Math.pow(0.92, dt / 16.67)
+                velocity *= damping
+
+                const hitStart = carousel.scrollLeft <= 0 && velocity < 0
+                const hitEnd = carousel.scrollLeft >= maxScroll && velocity > 0
+                if (hitStart || hitEnd) velocity = 0
+
+                if (Math.abs(velocity) >= 0.02) {
+                    inertiaRaf = requestAnimationFrame(tick)
+                } else {
+                    inertiaRaf = null
+                }
+            }
+
+            inertiaRaf = requestAnimationFrame(tick)
+        }
 
         const handleMouseDown = (e) => {
+            stopInertia()
             isDragging = true
             startX = e.pageX
             startScrollLeft = carousel.scrollLeft
+            lastMoveTs = performance.now()
+            velocity = 0
             carousel.classList.add('is-dragging')
         }
 
@@ -88,12 +132,22 @@ export default function ThirdSection() {
             if (!isDragging) return
             e.preventDefault()
             const delta = e.pageX - startX
+            const prevScrollLeft = carousel.scrollLeft
             carousel.scrollLeft = startScrollLeft - delta
+
+            const now = performance.now()
+            const dt = now - lastMoveTs
+            if (dt > 0) {
+                velocity = (carousel.scrollLeft - prevScrollLeft) / dt
+            }
+            lastMoveTs = now
         }
 
         const endDrag = () => {
+            if (!isDragging) return
             isDragging = false
             carousel.classList.remove('is-dragging')
+            startInertia()
         }
 
         carousel.addEventListener('mousedown', handleMouseDown)
@@ -102,6 +156,7 @@ export default function ThirdSection() {
         window.addEventListener('mouseup', endDrag)
 
         return () => {
+            stopInertia()
             carousel.removeEventListener('mousedown', handleMouseDown)
             carousel.removeEventListener('mousemove', handleMouseMove)
             carousel.removeEventListener('mouseleave', endDrag)
@@ -116,7 +171,7 @@ export default function ThirdSection() {
                     <div className="third-title-wrapper">
                         <div className={`small-info-text ${isVisible ? 'is-visible' : ''}`}>
                             <span className="small-info-line small-info-line-1">(Stack y</span>
-                            <span className="small-info-line small-info-line-2">tecnologias)</span>
+                            <span className="small-info-line small-info-line-2">tecnologías)</span>
                         </div>
                         <h1 className="third-big-title">
                             <span className={`title-line-1 ${isVisible ? 'is-visible' : ''}`}>
