@@ -1,0 +1,112 @@
+.fourth-section {
+  width: 100vw;
+  height: 100vh;
+  background: #0a0a0a;
+  position: relative;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.fourth-content-shell {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1366px;
+  height: calc(100vh - 80px);
+  margin: 40px 0;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.008);
+  backdrop-filter: blur(12px) saturate(108%);
+  -webkit-backdrop-filter: blur(12px) saturate(108%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+}
+
+.fourth-waves {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.fourth-waves-svg {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 300px;
+  transform: translateY(-50%);
+  overflow: visible;
+}
+
+.wave {
+  fill: none;
+  stroke: #d9e1eb;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.wave-1 {
+  stroke: rgba(85, 85, 85, 0.46);
+  opacity: 1;
+}
+
+.wave-2 {
+  stroke: rgba(85, 85, 85, 0.28);
+  opacity: 1;
+}
+
+.wave-3 {
+  stroke: rgba(85, 85, 85, 0.15);
+  opacity: 1;
+}
+
+.fourth-talk-marquee {
+  position: absolute;
+  top: -70px;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 8px;
+  pointer-events: none;
+}
+
+.fourth-talk-track {
+  margin: 0;
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+  will-change: transform;
+  animation: fourthTalkLoop 28s linear infinite;
+}
+
+.fourth-talk-text {
+  margin: 0;
+  padding: 0 24px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: clamp(4rem, 11vw, 12rem);
+  font-weight: 500;
+  line-height: 0.95;
+  color: rgba(250, 250, 250, 1);
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+@keyframes fourthTalkLoop {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
