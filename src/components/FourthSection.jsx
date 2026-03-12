@@ -54,19 +54,15 @@ export default function FourthSection() {
 
   const handleSend = () => {
     if (!canSend || isSubmitting || isSubmitted) return
-
     const phone = '5493624559655'
     const encodedMessage = encodeURIComponent(ctaValue.trim())
     const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`
-    const whatsappWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
-    if (!whatsappWindow) {
-      window.location.href = whatsappUrl
-    }
-
+    
+    // Solo abrir en nueva pestaña, sin fallback
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
     setIsCtaActive(false)
     if (ctaInputRef.current) ctaInputRef.current.blur()
     setIsSubmitting(true)
-
     if (submitDoneTimeoutRef.current) {
       clearTimeout(submitDoneTimeoutRef.current)
     }
@@ -306,7 +302,6 @@ export default function FourthSection() {
     </section>
   )
 }
-
 
 
 
