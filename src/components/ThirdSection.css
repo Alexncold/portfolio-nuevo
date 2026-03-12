@@ -329,7 +329,20 @@
 .carousel-image {
     flex: 1;
     background: #bdbdbd;
-    border: 1px solid rgba(250, 250, 250, 0.1);
+    overflow: hidden;
+}
+
+.carousel-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(1);
+    transition: filter 360ms ease;
+}
+
+.carousel-item:hover .carousel-image img {
+    filter: grayscale(0);
 }
 
 @media (max-width: 1100px) {

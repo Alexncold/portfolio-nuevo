@@ -37,6 +37,8 @@
   vertical-align: bottom;
   padding-inline: 0.04em;
   margin-inline: -0.04em;
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
 }
 
 .footer-brand-name-char {

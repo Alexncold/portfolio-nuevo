@@ -4,43 +4,51 @@ import './ThirdSection.css'
 const PROJECTS = [
     {
         num: '(01)',
-        title: 'Titulo',
-        desc: 'parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo'
+        title: 'Sistema de reservas',
+        desc: 'Diseño e implementación de un sistema de turnos.',
+        image: 'https://img.notionusercontent.com/s3/prod-files-secure%2F85690445-b989-4680-adfc-fd1d01fb91ea%2F8c818e90-ddc9-437d-a8b2-088f93607f16%2Fcover-sistema-de-reservas.jpg/size/w=2000?exp=1773422489&sig=A98r8RPeKKJd7QUb8MHBbTLk7NZ02VevjxqDzM4wOhc&id=2d9304a8-e6c5-80ed-8417-f2ba46ca740a&table=block&userId=418612d7-4ac1-4b88-9ab1-f39f2529a7e9'
     },
     {
         num: '(02)',
-        title: 'Titulo',
-        desc: 'parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo'
+        title: 'Cloud camera software',
+        desc: 'Rediseño de una aplicación de seguridad basada en la nube',
+        image: 'https://img.notionusercontent.com/s3/prod-files-secure%2F85690445-b989-4680-adfc-fd1d01fb91ea%2F2652c6c4-050c-43f1-95e9-3d671f68a4f9%2Fmc-portada.jpg/size/w=2000?exp=1773422507&sig=J2G9ENHxQcgVMHzmrNLT_h5XzevVAMB0bzUpQo40Zbw&id=d040c3a1-16dd-442a-87d9-95105fb7a445&table=block&userId=418612d7-4ac1-4b88-9ab1-f39f2529a7e9'
     },
     {
         num: '(03)',
-        title: 'Titulo',
-        desc: 'parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo'
+        title: 'Landin pages',
+        desc: 'Diseño web para software factory.',
+        image: 'https://img.notionusercontent.com/s3/prod-files-secure%2F85690445-b989-4680-adfc-fd1d01fb91ea%2F5194f32c-2af1-4b3a-8aa1-a1965741b544%2Fsoft-factory-image-cover.jpg/size/w=2000?exp=1773422523&sig=5SBqWAiFQLijBgenrFLBcPH6n2NZqvzrCDwPfHGqe1k&id=16e304a8-e6c5-80a1-be7e-f4b5dc49ac6b&table=block&userId=418612d7-4ac1-4b88-9ab1-f39f2529a7e9'
     },
     {
         num: '(04)',
-        title: 'Titulo',
-        desc: 'parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo'
+        title: 'Sistema de métricas',
+        desc: 'Integración de dos softwares en uno: CRM + Métricas.',
+        image: 'https://img.notionusercontent.com/s3/prod-files-secure%2F85690445-b989-4680-adfc-fd1d01fb91ea%2Fb149d3eb-4f3f-4af3-97d0-d954f364de88%2Fcover-metrichub.jpg/size/w=2000?exp=1773422538&sig=7m-jMzFSuurMTqY5x46Q_C1tQ7q30KPHfmAsMSQRo6c&id=a9889f39-9966-4cd7-9bd5-0c0c9b56182e&table=block&userId=418612d7-4ac1-4b88-9ab1-f39f2529a7e9'
     },
     {
         num: '(05)',
-        title: 'Titulo',
-        desc: 'parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo'
+        title: 'Sistema de pedidos',
+        desc: 'Diseño de sistema de reposición de stock.',
+        image: 'https://img.notionusercontent.com/s3/prod-files-secure%2F85690445-b989-4680-adfc-fd1d01fb91ea%2F8cffb7a7-566d-43f0-84c8-a6f0e906767d%2Fsistema-cover.jpg/size/w=2000?exp=1773422552&sig=S-GoTG5NtAWfKH-Zls_QqHemCcr_FNsBN1g5ay4n9cw&id=6410f6a9-64e2-4d32-bec9-a294494a69d8&table=block&userId=418612d7-4ac1-4b88-9ab1-f39f2529a7e9'
     },
     {
         num: '(06)',
-        title: 'Titulo',
-        desc: 'parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo'
+        title: 'App de delivery',
+        desc: 'Creación de una app de pedidos de comida.',
+        image: 'https://img.notionusercontent.com/s3/prod-files-secure%2F85690445-b989-4680-adfc-fd1d01fb91ea%2F39733cf8-87a7-49fc-9a4a-dcf73450e280%2FMacBook_Air_-_6.jpg/size/w=2000?exp=1773422567&sig=JQZDmO8wdLNKSOhCM0lreAmZgDra3AyiufPwiDxrWe8&id=f6c749e6-667d-4acf-a222-96bd1e2dc376&table=block&userId=418612d7-4ac1-4b88-9ab1-f39f2529a7e9'
     },
     {
         num: '(07)',
-        title: 'Titulo',
-        desc: 'parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo'
+        title: 'Sitio web de comidas',
+        desc: 'Transformación progresiva de app de comidas en sitio web.',
+        image: 'https://img.notionusercontent.com/s3/prod-files-secure%2F85690445-b989-4680-adfc-fd1d01fb91ea%2Fa7fb49b8-0692-48b0-a0a2-9528bdbb63db%2FMacBook_Air_-_4.jpg/size/w=2000?exp=1773422583&sig=qyJkd8zGkKWW0_0-M1WxI4QP-W-nZmHBCet2lYNLOZA&id=37d63e45-ef19-4c1f-b1f2-38bd3e9254c9&table=block&userId=418612d7-4ac1-4b88-9ab1-f39f2529a7e9'
     },
     {
         num: '(08)',
-        title: 'Titulo',
-        desc: 'parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo parrafo'
+        title: 'Sitio de impresiones 3D',
+        desc: 'Diseño de sitio web para emprendimiento.',
+        image: 'https://img.notionusercontent.com/s3/prod-files-secure%2F85690445-b989-4680-adfc-fd1d01fb91ea%2F2706bcc7-1261-4ee4-a813-2d2b76198171%2Fsam3d-portada.jpg/size/w=2000?exp=1773422598&sig=J6ItI3OLaU08uxkA0xqrUFiykJiDByVtrV4rteWIphs&id=2b91d1a4-d2fd-4761-a5d2-0d7955b807d8&table=block&userId=418612d7-4ac1-4b88-9ab1-f39f2529a7e9'
     }
 ]
 
@@ -230,12 +238,16 @@ export default function ThirdSection() {
                                             <span className="carousel-title">{item.title}</span>
                                         </div>
                                         <p className="carousel-desc">{item.desc}</p>
-                                        <div className="carousel-image"></div>
+                                        <div className="carousel-image">
+                                            <img src={item.image} alt={item.title} loading="lazy" draggable="false" />
+                                        </div>
                                     </>
                                 )}
                                 {isInverted && (
                                     <>
-                                        <div className="carousel-image"></div>
+                                        <div className="carousel-image">
+                                            <img src={item.image} alt={item.title} loading="lazy" draggable="false" />
+                                        </div>
                                         <div className="carousel-header">
                                             <span className="carousel-num">{item.num}</span>
                                             <span className="carousel-title">{item.title}</span>
