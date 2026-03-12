@@ -54,6 +54,15 @@ export default function FourthSection() {
 
   const handleSend = () => {
     if (!canSend || isSubmitting || isSubmitted) return
+
+    const phone = '5493624559655'
+    const encodedMessage = encodeURIComponent(ctaValue.trim())
+    const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`
+    const whatsappWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
+    if (!whatsappWindow) {
+      window.location.href = whatsappUrl
+    }
+
     setIsCtaActive(false)
     if (ctaInputRef.current) ctaInputRef.current.blur()
     setIsSubmitting(true)
@@ -297,7 +306,6 @@ export default function FourthSection() {
     </section>
   )
 }
-
 
 
 
