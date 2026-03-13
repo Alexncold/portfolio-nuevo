@@ -8,8 +8,11 @@ export default function FirstSection() {
   const [logoAnimated, setLogoAnimated] = useState(false)
 
   useEffect(() => {
-    const timer = setTimeout(() => setLogoAnimated(true), 100)
-    return () => clearTimeout(timer)
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setLogoAnimated(true)
+      })
+    })
   }, [])
 
   return (
@@ -23,7 +26,7 @@ export default function FirstSection() {
       </MainContainer>
       <nav className={`navbar ${logoAnimated ? 'is-animated' : ''}`}>
         <div className="navbar-logo">
-          <svg viewBox="0 0 100 100" className="logo-svg">
+          <svg viewBox="0 0 100 100" className="logo-svg" key="logo-svg">
             <defs>
               <path id="circle-text" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" />
               <mask id="logo-mask">

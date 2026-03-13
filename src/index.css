@@ -688,10 +688,12 @@ button:focus-visible {
 .mask-path {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
+  will-change: stroke-dashoffset;
 }
 
 .mask-final {
   opacity: 0;
+  will-change: opacity;
 }
 
 @keyframes drawLogoMask {
@@ -774,13 +776,11 @@ button:focus-visible {
 
 /* Contenedor interno para animar solo texto e icono */
 .navbar-text>* {
-  opacity: 1;
-  /* ← CAMBIADO: Visible desde el inicio */
+  opacity: 0;
   transform: translateY(40px);
-  /* ← AUMENTADO: De 20px a 40px */
   position: relative;
   z-index: 1;
-  /* ← DEBAJO del subrayado */
+  will-change: transform, opacity;
 }
 
 /* Animación de máscara para revelar texto */
@@ -807,11 +807,12 @@ button:focus-visible {
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 100%;
+  width: 0;
   height: 1px;
   background: rgba(250, 250, 250, 1.0);
   opacity: 0;
   z-index: 10;
+  will-change: width, opacity;
 }
 
 .navbar.is-animated .mask-path {
@@ -846,17 +847,13 @@ button:focus-visible {
 /* Animación para texto e icono de abajo hacia arriba */
 @keyframes slideUpFromBottom {
   0% {
-    opacity: 1;
-    /* ← CAMBIADO: Visible desde el inicio */
+    opacity: 0;
     transform: translateY(40px);
-    /* ← COMIENZA: 40px abajo */
   }
 
   100% {
     opacity: 1;
-    /* ← TERMINA: Visible */
     transform: translateY(0);
-    /* ← TERMINA: Posición normal */
   }
 }
 
