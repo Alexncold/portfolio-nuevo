@@ -1,9 +1,17 @@
+import { useEffect, useState } from 'react'
 import MainContainer from './MainContainer'
 import CustomCursor from './CustomCursor'
 import SpotlightEffect from './SpotlightEffect'
 import ScrollAnimations from './ScrollAnimations'
 
 export default function FirstSection() {
+  const [logoAnimated, setLogoAnimated] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLogoAnimated(true), 100)
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
     <section className="section first-section">
       <div className="reveal-container"></div>
@@ -13,7 +21,7 @@ export default function FirstSection() {
       <MainContainer>
         {/* Contenido del portfolio irá aquí */}
       </MainContainer>
-      <nav className="navbar">
+      <nav className={`navbar ${logoAnimated ? 'is-animated' : ''}`}>
         <div className="navbar-logo">
           <svg viewBox="0 0 100 100" className="logo-svg">
             <defs>
