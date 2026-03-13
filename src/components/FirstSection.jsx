@@ -74,7 +74,7 @@ export default function FirstSection() {
         </div>
         <div className="navbar-text-container">
           <div className="navbar-text-mask">
-            <a href="https://www.linkedin.com/in/alejandro-stafuza/" className="navbar-text" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/alejandro-stafuza/" className="navbar-text use-native-cursor" target="_blank" rel="noopener noreferrer">
               <span>Linkedin</span>
               <span className="material-symbols-outlined">
                 east

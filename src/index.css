@@ -684,6 +684,24 @@ button:focus-visible {
   /* ← AUMENTADO: De 60px a 90px (todo el alto del navbar) */
   height: 90px;
 }
+
+/* Ocultar la imagen del logo hasta que comience la animación */
+.navbar:not(.is-animated) .logo-svg image {
+  opacity: 0;
+}
+
+.navbar.is-animated .logo-svg image {
+  opacity: 1;
+}
+
+.navbar:not(.is-animated) #logo-mask {
+  opacity: 0;
+}
+
+.navbar.is-animated #logo-mask {
+  opacity: 1;
+  transition: opacity 0.01s;
+}
 /* Animación de revelado para la imagen del logo */
 .mask-path {
   stroke-dasharray: 1;

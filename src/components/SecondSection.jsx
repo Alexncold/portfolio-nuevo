@@ -371,7 +371,7 @@ export default function SecondSection() {
   }, [hoveredRole, walkFrame]);
 
   return (
-    <section className="section second-section" ref={sectionRef}>
+    <section id="section-2" className="section second-section" ref={sectionRef}>
       <div
         className={`second-corner-icon ${isVisible ? 'is-visible' : ''}`}
         aria-hidden="true"

@@ -170,7 +170,7 @@ export default function FourthSection() {
   }, [])
 
   return (
-    <section className="section fourth-section" ref={sectionRef}>
+    <section id="section-4" className="section fourth-section" ref={sectionRef}>
       <div className="fourth-talk-marquee" aria-label="Hablemos — Let's talk — Parliamo — Lass uns reden — Давайте поговорим — 話しましょう — Låt oss prata —">
         <h2 className="fourth-talk-track">
           <span className="fourth-talk-text">Hablemos — Let&apos;s talk — Parliamo — Lass uns reden — Давайте поговорим — 話しましょう — Låt oss prata —</span>
@@ -302,7 +302,6 @@ export default function FourthSection() {
     </section>
   )
 }
-
 
 
 

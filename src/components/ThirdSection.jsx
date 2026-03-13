@@ -173,7 +173,7 @@ export default function ThirdSection() {
     }, [])
 
     return (
-        <section className="section third-section" ref={sectionRef}>
+        <section id="section-3" className="section third-section" ref={sectionRef}>
             <div className="third-content-container">
                 <div className="third-header">
                     <div className="third-title-wrapper">

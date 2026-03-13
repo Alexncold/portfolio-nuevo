@@ -6,6 +6,7 @@ export default function CustomCursor() {
   const [isInSecondSection, setIsInSecondSection] = useState(false)
   const [isOverThirdCarousel, setIsOverThirdCarousel] = useState(false)
   const [isMouseDown, setIsMouseDown] = useState(false)
+  const [useNativePointer, setUseNativePointer] = useState(false)
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -15,9 +16,11 @@ export default function CustomCursor() {
       if (hoveredElement instanceof Element) {
         setIsInSecondSection(Boolean(hoveredElement.closest('.second-section')))
         setIsOverThirdCarousel(Boolean(hoveredElement.closest('.third-carousel')))
+        setUseNativePointer(Boolean(hoveredElement.closest('.use-native-cursor')))
       } else {
         setIsInSecondSection(false)
         setIsOverThirdCarousel(false)
+        setUseNativePointer(false)
       }
     }
 
@@ -26,6 +29,7 @@ export default function CustomCursor() {
       setIsInSecondSection(false)
       setIsOverThirdCarousel(false)
       setIsMouseDown(false)
+      setUseNativePointer(false)
     }
     const handleMouseDown = () => setIsMouseDown(true)
     const handleMouseUp = () => setIsMouseDown(false)
@@ -45,7 +49,7 @@ export default function CustomCursor() {
 
   return (
     <>
-      {!isInSecondSection && (
+      {!isInSecondSection && !useNativePointer && (
         <>
           <div 
             className={`custom-cursor-circle ${isOverThirdCarousel ? 'is-carousel-hover' : ''}`}
@@ -68,7 +72,7 @@ export default function CustomCursor() {
           />
         </>
       )}
-      {isInSecondSection && (
+      {isInSecondSection && !useNativePointer && (
         <div
           className="custom-cursor-image"
           style={{

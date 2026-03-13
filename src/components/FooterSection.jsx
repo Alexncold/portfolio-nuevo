@@ -7,6 +7,12 @@ export default function FooterSection() {
   const footerRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId)
+    if (!section) return
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   useEffect(() => {
     const currentRef = footerRef.current
     if (!currentRef) return
@@ -48,18 +54,36 @@ export default function FooterSection() {
         <div className="footer-links-block">
           <div className="footer-col">
             <p className="footer-col-label">PORTFOLIO</p>
-            <p className={`footer-col-item footer-reveal footer-reveal-1 ${isVisible ? 'is-visible' : ''}`}>Conoceme</p>
-            <p className={`footer-col-item footer-reveal footer-reveal-2 ${isVisible ? 'is-visible' : ''}`}>Mis proyectos</p>
+            <button
+              type="button"
+              className={`footer-col-item footer-nav-button use-native-cursor footer-reveal footer-reveal-1 ${isVisible ? 'is-visible' : ''}`}
+              onClick={() => scrollToSection('section-2')}
+            >
+              Conoceme
+            </button>
+            <button
+              type="button"
+              className={`footer-col-item footer-nav-button use-native-cursor footer-reveal footer-reveal-2 ${isVisible ? 'is-visible' : ''}`}
+              onClick={() => scrollToSection('section-3')}
+            >
+              Mis proyectos
+            </button>
           </div>
 
           <div className="footer-col">
             <p className="footer-col-label">WHATSAPP</p>
-            <p className={`footer-col-main footer-reveal footer-reveal-3 ${isVisible ? 'is-visible' : ''}`}>Hablemos</p>
+            <button
+              type="button"
+              className={`footer-col-main footer-nav-button use-native-cursor footer-reveal footer-reveal-3 ${isVisible ? 'is-visible' : ''}`}
+              onClick={() => scrollToSection('section-4')}
+            >
+              Hablemos
+            </button>
           </div>
 
           <div className="footer-col">
             <p className="footer-col-label">CONTACTO PROFESIONAL</p>
-            <a className={`footer-col-link footer-reveal footer-reveal-4 ${isVisible ? 'is-visible' : ''}`} href="https://www.linkedin.com/in/alejandro-stafuza/" target="_blank" rel="noreferrer">
+            <a className={`footer-col-link use-native-cursor footer-reveal footer-reveal-4 ${isVisible ? 'is-visible' : ''}`} href="https://www.linkedin.com/in/alejandro-stafuza/" target="_blank" rel="noreferrer">
               <span>Encuentrame en Linkedin</span>
               <span className="material-symbols-outlined footer-arrow" aria-hidden="true">east</span>
             </a>
