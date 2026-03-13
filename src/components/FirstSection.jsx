@@ -4,15 +4,45 @@ import CustomCursor from './CustomCursor'
 import SpotlightEffect from './SpotlightEffect'
 import ScrollAnimations from './ScrollAnimations'
 
+const LOGO_IMAGE_SRC = 'https://i.ibb.co/pBf7cqyr/avatar-ale-light.png'
+
 export default function FirstSection() {
   const [logoAnimated, setLogoAnimated] = useState(false)
 
   useEffect(() => {
-    requestAnimationFrame(() => {
+    let isCancelled = false
+    let didStart = false
+
+    const startAnimation = () => {
+      if (isCancelled || didStart) return
+      didStart = true
       requestAnimationFrame(() => {
-        setLogoAnimated(true)
+        requestAnimationFrame(() => {
+          if (!isCancelled) setLogoAnimated(true)
+        })
       })
-    })
+    }
+
+    const preload = new Image()
+    preload.decoding = 'async'
+    preload.src = LOGO_IMAGE_SRC
+
+    if (typeof preload.decode === 'function') {
+      preload.decode().then(startAnimation).catch(startAnimation)
+    } else {
+      preload.onload = startAnimation
+      preload.onerror = startAnimation
+    }
+
+    // Fallback para evitar que quede bloqueado si decode/onload no dispara en algunos navegadores.
+    const fallbackTimer = setTimeout(startAnimation, 1200)
+
+    return () => {
+      isCancelled = true
+      clearTimeout(fallbackTimer)
+      preload.onload = null
+      preload.onerror = null
+    }
   }, [])
 
   return (
@@ -53,7 +83,7 @@ export default function FirstSection() {
               </mask>
             </defs>
             <image
-              href="https://i.ibb.co/pBf7cqyr/avatar-ale-light.png"
+              href={LOGO_IMAGE_SRC}
               x="25"
               y="25"
               width="50"
