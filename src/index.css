@@ -1,0 +1,1076 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* Nuevo contenedor para agrupar ambos */
+.title-group {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  /* Alinea los hijos a la derecha del contenedor */
+  z-index: 100;
+}
+
+.prueba-text {
+  font-family: 'Instrument Serif', serif;
+  font-size: 14rem;
+  font-weight: 700;
+  color: rgba(250, 250, 250, 1.0);
+  position: relative;
+  /* Cambiado de absolute a relative */
+  text-align: center;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: rgba(250, 250, 250, 1.0);
+  position: relative;
+  /* Cambiado de absolute a relative */
+  text-align: right;
+  /* Alineación de texto a la derecha */
+  opacity: 0;
+  /* Hidden initially for animation */
+  margin-top: -75px;
+  /* ← UN POCO MÁS CERCANO */
+  margin-right: -10px;
+  /* ← AJUSTE FINO: Alinear con el título */
+  animation: slideUpSubtitle 0.6s ease-out 0.8s forwards;
+  /* Initial load animation */
+  width: 100%;
+  /* Ocupa el ancho del contenedor (que dicta el título) */
+}
+
+.location-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  /* ← MÁS CHICO */
+  font-weight: 700;
+  /* ← BOLD */
+  color: rgba(250, 250, 250, 1.0);
+  position: absolute;
+  top: 75%;
+  /* ← ALINEADO POR ARRIBA (Aprox visualmente al centro anterior) */
+  left: 20px;
+  /* ← ALINEADO A LA IZQUIERDA */
+  /* transform: translateY(-50%); ELIMINADO para alinear por arriba */
+  z-index: 100;
+  opacity: 1;
+  /* ← SIEMPRE VISIBLE */
+  line-height: 1.2;
+  /* ← MÁS ESPACIO ENTRE LÍNEAS */
+  padding-left: 50px;
+  /* ← PADDING IZQUIERDO */
+}
+
+.location-text-right {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  /* ← MÁS CHICO */
+  font-weight: 700;
+  /* ← BOLD (MISMO ESTILO) */
+  color: rgba(250, 250, 250, 1.0);
+  position: absolute;
+  top: 75%;
+  /* ← MISMA ALTURA QUE location-text */
+  left: 25%;
+  /* ← POSICIÓN INTERMEDIA */
+  /* transform: translateY(-50%); ELIMINADO para alinear por arriba con el otro texto */
+  z-index: 100;
+  opacity: 1;
+  /* ← SIEMPRE VISIBLE */
+  line-height: 1.2;
+  /* ← MÁS ESPACIO ENTRE LÍNEAS */
+  text-align: left;
+  /* ← ALINEADO A LA IZQUIERDA DESDE LA POSICIÓN */
+}
+
+.section-text-block {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  text-align: center;
+}
+
+/* En segunda secciÃ³n, centramos todo el bloque como una sola unidad */
+.second-section .section-text-block {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.section-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: rgba(250, 250, 250, 1.0);
+  position: relative;
+  line-height: 1.2;
+}
+
+.second-corner-icon {
+  position: absolute;
+  top: 44px;
+  right: 44px;
+  width: 56px;
+  height: 56px;
+  z-index: 110;
+  pointer-events: none;
+}
+
+.second-corner-icon-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.second-corner-icon-svg path {
+  fill: none;
+  stroke: rgba(250, 250, 250, 1);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.second-corner-icon.is-visible .second-corner-path-top {
+  animation: secondCornerTopIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+
+.second-corner-icon.is-visible .second-corner-path-bottom {
+  animation: secondCornerBottomIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+
+@keyframes secondCornerTopIn {
+  0% {
+    opacity: 0;
+    transform: translate(18px, -18px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes secondCornerBottomIn {
+  0% {
+    opacity: 0;
+    transform: translate(-18px, 18px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+/* --- Slide-up animations for section texts --- */
+.section-text-1 {
+  opacity: 0;
+  transform: translateY(120px);
+  animation: sectionTextSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-play-state: paused;
+}
+
+.section-text-1.is-visible {
+  animation-play-state: running;
+}
+
+.section-text-2 {
+  opacity: 0;
+  transform: translateY(220px);
+  animation: sectionTextSlideUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+  animation-play-state: paused;
+}
+
+.section-text-2.is-visible {
+  animation-play-state: running;
+}
+
+@keyframes sectionTextSlideUp {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-connection-arrow {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%) translateX(-170px);
+  width: 780px;
+  height: 520px;
+  pointer-events: none;
+  z-index: 0;
+  --section-arrow-duration: 3.5s;
+}
+
+.section-connection-arrow .section-connection-arrow-body {
+  vector-effect: non-scaling-stroke;
+  stroke: rgba(250, 250, 250, 1.0);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+}
+
+.section-connection-arrow.is-visible .section-connection-arrow-body {
+  animation: sectionArrowAppearDraw var(--section-arrow-duration) cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes sectionArrowAppearDraw {
+  0% {
+    opacity: 0;
+    stroke-dashoffset: 1;
+  }
+
+  15% {
+    opacity: 1;
+    stroke-dashoffset: 1;
+  }
+
+  60% {
+    opacity: 1;
+    stroke-dashoffset: 0.3;
+    /* Smooth fast phase */
+  }
+
+  100% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+    /* Elegant finish */
+  }
+}
+
+.section-connection-arrow .section-connection-arrowhead-side {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.section-connection-arrow:not(.arrowhead-visible) .section-connection-arrowhead-side {
+  animation: none;
+}
+
+.section-connection-arrow.arrowhead-visible .section-connection-arrowhead-side-1 {
+  animation: arrowheadSideDraw 0.2s ease-out forwards;
+}
+
+.section-connection-arrow.arrowhead-visible .section-connection-arrowhead-side-2 {
+  animation: arrowheadSideDraw 0.2s ease-out 0.1s forwards;
+}
+
+@keyframes arrowheadSideDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+
+.section-avatar-container {
+  margin-top: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-avatar-svg {
+  width: 450px;
+  height: 450px;
+}
+
+.section-avatar-image {
+  width: 120px;
+  height: 120px;
+}
+
+/* --- Reveal Animation (Marker Effect) --- */
+.section-mask-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: drawLogoMask 1.8s ease-out forwards;
+  animation-play-state: paused;
+}
+
+.section-mask-path.is-visible {
+  animation-play-state: running;
+}
+
+.section-mask-final {
+  opacity: 0;
+  animation: finishLogoReveal 0.01s linear 1.78s forwards;
+  animation-play-state: paused;
+}
+
+.section-mask-final.is-visible {
+  animation-play-state: running;
+}
+
+
+.section-avatar-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  fill: rgba(250, 250, 250, 1.0);
+  animation: rotateSectionText 15s linear infinite;
+  transform-origin: 135px 135px;
+}
+
+@keyframes rotateSectionText {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.section-avatar {
+  width: 300px;
+  height: 300px;
+  margin-top: 30px;
+  object-fit: cover;
+}
+
+.bold-text {
+  font-weight: 700;
+}
+
+.section-content-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 60px;
+}
+
+.section-side-text {
+  position: absolute;
+  left: auto;
+  right: calc(50% + 280px);
+  top: 220px;
+  font-family: 'Instrument Serif', serif;
+  font-size: 3.8rem;
+  font-weight: 700;
+  color: rgba(250, 250, 250, 1.0);
+  text-align: right;
+  line-height: 1.2;
+  opacity: 0;
+  animation: slideInSideText 0.8s ease-out 1s forwards;
+}
+
+@keyframes slideInSideText {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.section-side-text-right {
+  position: absolute;
+  right: auto;
+  left: calc(50% + 280px);
+  top: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.side-text-title-mask {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 12px;
+  /* Just enough for the underline */
+  margin-bottom: 15px;
+  width: fit-content;
+  margin-top: -10px;
+  /* Offset to keep position similar */
+}
+
+.side-text-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 3.8rem;
+  font-weight: 700;
+  color: rgba(250, 250, 250, 1.0);
+  margin: 0;
+  position: relative;
+  white-space: nowrap;
+  line-height: 1.2;
+  transform: translateY(125%);
+  /* Increased to ensure it's fully outside the mask */
+  opacity: 1;
+}
+
+.side-text-title-mask.is-visible .side-text-title {
+  animation: slideUpFromBottom 0.6s ease-out 2.0s forwards;
+  /* Reduced from 2.5s */
+}
+
+.side-text-title-underline {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: rgba(250, 250, 250, 1.0);
+  opacity: 1;
+  /* Always opaque when animating width */
+}
+
+.side-text-title-mask.is-visible .side-text-title-underline {
+  animation: drawUnderlineHorizontal 0.5s ease-out 1.5s forwards;
+  /* Reduced from 2.0s */
+}
+
+@keyframes drawUnderlineHorizontal {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.side-text-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+}
+
+.side-text-list li {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 2.1rem;
+  font-weight: 400;
+  color: #A0A0A0;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  line-height: 1;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.item-num {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #A0A0A0;
+  margin-right: 16px;
+  display: inline-block;
+  line-height: 1;
+  transform: translateY(3px);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.char {
+  display: inline-block;
+  opacity: 0;
+  /* No opacity transition as requested */
+}
+
+.side-text-list li.is-visible .char {
+  animation: charReveal 0.01s linear forwards;
+}
+
+@keyframes charReveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.side-text-list li:hover .char,
+.side-text-list li:hover .item-num {
+  color: #fafafa;
+}
+
+.location-text-light {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  /* ← MÁS CHICO */
+  font-weight: 300;
+  /* ← LIGHT */
+  color: rgba(250, 250, 250, 1.0);
+  position: absolute;
+  top: 84%;
+  /* ← BAJADO 12% */
+  left: 20px;
+  /* ← ALINEADO A LA IZQUIERDA */
+  transform: translateY(-50%);
+  z-index: 100;
+  opacity: 1;
+  /* ← SIEMPRE VISIBLE */
+  line-height: 1.2;
+  /* ← MÁS ESPACIO ENTRE LÍNEAS */
+  padding-left: 50px;
+  /* ← PADDING IZQUIERDO */
+}
+
+.location-text-right .location-text-light {
+  position: relative;
+  /* ← RELATIVO AL CONTENEDOR PADRE */
+  top: auto;
+  /* ← ELIMINAR POSICIONAMIENTO ABSOLUTO */
+  left: auto;
+  /* ← ELIMINAR POSICIONAMIENTO ABSOLUTO */
+  transform: none;
+  /* ← ELIMINAR TRANSFORM */
+  margin-top: 20px;
+  /* ← ESPACIO DESDE / TRABAJOS */
+  padding-left: 0;
+  /* ← SIN PADDING ADICIONAL */
+}
+
+/* Contenedor principal para el contenido con límite de ancho */
+.content-container {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1366px;
+  height: 100vh;
+  pointer-events: none;
+  /* No interferir con eventos del mouse */
+  z-index: 100;
+  /* Mismo nivel que los textos */
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 2vh;
+  /* ← MARGEN IGUAL QUE MAIN CONTAINER */
+  left: 50%;
+  /* ← CENTRADO COMO CONTENT-CONTAINER */
+  transform: translateX(-50%);
+  /* ← CENTRADO COMO CONTENT-CONTAINER */
+  z-index: 1000;
+  /* Por encima de todo */
+  display: flex;
+  align-items: center;
+  /* ← CENTRADO VERTICAL DE TODO */
+  justify-content: space-between;
+  /* ← ESPACIO ENTRE ELEMENTOS */
+  gap: 8px;
+  width: 100%;
+  /* ← ANCHO DEL CONTENEDOR */
+  max-width: 1366px;
+  height: 90px;
+  /* ← DUPLICADO: De 45px a 90px */
+  pointer-events: auto;
+  /* Permitir interacción */
+  padding: 0 20px;
+  /* ← Padding para no pegar a los bordes */
+}
+
+/* Logo circular del navbar */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -12px;
+}
+
+.logo-svg {
+  width: 90px;
+  /* ← AUMENTADO: De 60px a 90px (todo el alto del navbar) */
+  height: 90px;
+}
+
+/* Ocultar la imagen del logo hasta que comience la animación */
+.navbar:not(.is-animated) .logo-svg image {
+  opacity: 0;
+}
+
+.navbar.is-animated .logo-svg image {
+  opacity: 1;
+}
+
+.navbar:not(.is-animated) #logo-mask {
+  opacity: 0;
+}
+
+.navbar.is-animated #logo-mask {
+  opacity: 1;
+  transition: opacity 0.01s;
+}
+/* Animación de revelado para la imagen del logo */
+.mask-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  will-change: stroke-dashoffset;
+}
+
+.mask-final {
+  opacity: 0;
+  will-change: opacity;
+}
+
+@keyframes drawLogoMask {
+  0% {
+    stroke-dashoffset: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes finishLogoReveal {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Texto circular del logo */
+.logo-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  /* ← REDUCIDO: De 18px a 14px */
+  letter-spacing: 1px;
+  fill: rgba(250, 250, 250, 1.0);
+  animation: rotateText 10s linear infinite;
+  transform-origin: 50px 50px;
+}
+
+/* Animación de rotación infinita para texto circular */
+@keyframes rotateText {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Contenedor que envuelve texto y subrayado */
+.navbar-text-container {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.navbar-text-mask {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  padding-bottom: 13px;
+}
+
+.navbar-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: rgba(250, 250, 250, 1.0);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  line-height: 1;
+  /* ← AGREGADO: Elimina espacio vertical extra */
+  padding: 0;
+  /* ← AGREGADO: Sin padding interno */
+  margin: 0;
+  /* ← AGREGADO: Sin margin interno */
+}
+
+/* Contenedor interno para animar solo texto e icono */
+.navbar-text>* {
+  opacity: 0;
+  transform: translateY(40px);
+  position: relative;
+  z-index: 1;
+  will-change: transform, opacity;
+}
+
+/* Animación de máscara para revelar texto */
+@keyframes revealText {
+  0% {
+    clip-path: inset(0 0 calc(100% - 1px) 0);
+    /* ← AJUSTADO: Llega hasta el subrayado */
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+    /* ← VISIBLE: Todo descubierto */
+  }
+}
+
+/* Aplicar animación de máscara al texto e icono */
+.navbar.is-animated .navbar-text>* {
+  animation:
+    slideUpFromBottom 0.4s ease-out 0.6s forwards;
+  /* ← ANTES: De 0.7s a 0.6s */
+}
+/* Subrayado - ahora es un elemento normal del flex, NO absolute */
+.navbar-underline {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: rgba(250, 250, 250, 1.0);
+  opacity: 0;
+  z-index: 10;
+  will-change: width, opacity;
+}
+
+.navbar.is-animated .mask-path {
+  animation: drawLogoMask 1.5s ease-out 0.2s forwards;
+}
+
+.navbar.is-animated .mask-final {
+  animation: finishLogoReveal 0.01s linear 1.68s forwards;
+}
+
+.navbar.is-animated .navbar-underline {
+  animation: slideInFromLeft 0.4s ease-out 0.3s forwards;
+}
+
+/* Animación de carga para el subrayado */
+@keyframes slideInFromLeft {
+  0% {
+    width: 0;
+    /* ← COMIENZA: Sin subrayado */
+    opacity: 0;
+    /* ← COMIENZA: Transparente */
+  }
+
+  100% {
+    width: 100%;
+    /* ← TERMINA: Ancho completo */
+    opacity: 1;
+    /* ← TERMINA: Totalmente visible */
+  }
+}
+
+/* Animación para texto e icono de abajo hacia arriba */
+@keyframes slideUpFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navbar-text:hover {
+  color: rgba(250, 250, 250, 0.7);
+}
+
+/* Material Symbols */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+  font-size: 1rem;
+  color: rgba(250, 250, 250, 1.0);
+  transition: color 0.2s ease;
+}
+
+.navbar:hover .material-symbols-outlined {
+  color: rgba(250, 250, 250, 0.7);
+}
+
+@media (max-width: 768px) {
+  .title-group {
+    top: 33%;
+  }
+
+  .location-text {
+    left: calc(50% - 150px);
+    padding-left: 0;
+  }
+
+  .content-container > .location-text-light {
+    left: calc(50% - 150px);
+    padding-left: 0;
+    top: calc(75% + 64px);
+    transform: none;
+  }
+
+  .location-text-right {
+    left: calc(50% + 6px);
+    right: auto;
+  }
+
+  .location-text-right .location-text-light {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    margin-top: 0;
+    transform: none;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+
+  .navbar {
+    width: 100%;
+    /* ← MÓVIL: Ancho completo */
+    padding: 0 20px;
+    /* ← MÓVIL: Misma márgenes que content-container */
+  }
+
+  .content-container {
+    width: 100%;
+    /* ← MÓVIL: Ancho completo */
+    padding: 0 20px;
+    /* ← MÓVIL: Pequeños márgenes laterales */
+  }
+
+  .prueba-text {
+    font-size: 4rem;
+    top: auto;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    top: auto;
+    margin-top: -26px;
+    margin-right: 0;
+  }
+}
+
+.text-part-1 {
+  display: inline-block;
+  animation: slideUpText 0.7s ease-in-out 0.5s forwards;
+}
+
+.text-part-2 {
+  display: inline-block;
+  margin-right: -0.06em;
+  animation: slideUpText 0.8s ease-in-out 0.65s forwards;
+}
+
+@keyframes slideUpText {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes slideUpSubtitle {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: #161616;
+  z-index: 9999;
+  /* ← MÁXIMO: Por encima de absolutamente todo */
+  animation: revealFromTop 1.6s ease-in-out forwards;
+  pointer-events: none;
+}
+
+@keyframes revealFromTop {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.scroll-indicator {
+  position: absolute;
+  top: 75.8%;
+  right: 20px;
+  /* Ajustado para ser simétrico con el bloque de texto izquierdo */
+  z-index: 100;
+  opacity: 0;
+  animation: slideInFromRight 0.5s ease-out 0.8s forwards;
+}
+
+.scroll-indicator svg {
+  width: 30px;
+  height: 100px;
+  display: block;
+}
+
+.scroll-indicator svg path {
+  fill: none;
+  /* Asegura que no tenga relleno negro accidental */
+}
+
+.scroll-indicator .arrow-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: drawArrowLine 0.4s ease-out 1.0s forwards;
+}
+
+.scroll-indicator .arrow-tip-left {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: drawArrowTip 0.2s ease-out 1.4s forwards;
+}
+
+.scroll-indicator .arrow-tip-right {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: drawArrowTip 0.2s ease-out 1.4s forwards;
+}
+
+@keyframes drawArrowLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes drawArrowTip {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

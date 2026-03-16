@@ -1,0 +1,406 @@
+.third-section {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background: transparent;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.third-content-container {
+    width: 100%;
+    max-width: 1366px;
+    height: 100%;
+    padding: 40px 40px 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.third-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.third-title-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.third-big-title {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11rem;
+    font-weight: 500;
+    color: rgba(250, 250, 250, 1.0);
+    line-height: 0.85;
+    margin: 0;
+    text-transform: none;
+    letter-spacing: -6px;
+}
+
+.title-line-1 {
+    display: block;
+    margin-bottom: 0px;
+}
+
+.title-char-mask {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    /* Extra bleed to avoid glyph clipping with negative letter-spacing */
+    padding-inline: 0.08em;
+    margin-inline: -0.08em;
+}
+
+.title-char {
+    display: inline-block;
+    transform: translateY(105%);
+}
+
+.title-line-1.is-visible .title-char-1 {
+    animation: thirdTitleCharIn 0.72s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+}
+
+.title-line-1.is-visible .title-char-2 {
+    animation: thirdTitleCharIn 0.72s cubic-bezier(0.22, 1, 0.36, 1) 0.34s forwards;
+}
+
+.title-line-1.is-visible .title-char-3 {
+    animation: thirdTitleCharIn 0.72s cubic-bezier(0.22, 1, 0.36, 1) 0.48s forwards;
+}
+
+@keyframes thirdTitleCharIn {
+    0% {
+        transform: translateY(105%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.title-line-2 {
+    display: block;
+    margin-left: 170px;
+    margin-top: -0.08em;
+}
+
+.title-line-2 .title-char-mask {
+    padding-bottom: 0.18em;
+    margin-bottom: -0.18em;
+}
+
+.title-line-2.is-visible .title-char {
+    transform: translateY(128%);
+    animation: thirdTitleCharInLine2 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes thirdTitleCharInLine2 {
+    0% {
+        transform: translateY(128%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.small-info-text {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: rgba(250, 250, 250, 0.7);
+    line-height: 1.2;
+    transform: translateY(-0.75em);
+}
+
+.small-info-line {
+    opacity: 0;
+}
+
+.small-info-text.is-visible .small-info-line-1 {
+    animation: thirdStacksFadeIn 0.55s ease-out 0.15s forwards;
+}
+
+.small-info-text.is-visible .small-info-line-2 {
+    animation: thirdStacksFadeIn 0.55s ease-out 0.4s forwards;
+}
+
+@keyframes thirdStacksFadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.third-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    max-width: 280px;
+    margin-top: 10px;
+}
+
+.third-right-text {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: rgba(250, 250, 250, 0.85);
+    line-height: 1.4;
+    margin: 0;
+    transform: translateY(42px);
+    opacity: 0;
+}
+
+.third-right-text.is-visible {
+    animation: thirdRightTextReveal 0.65s ease-out 0.55s forwards;
+}
+
+@keyframes thirdRightTextReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(54px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(42px);
+    }
+}
+
+.third-notion-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 121px;
+}
+
+.third-notion-mask {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    overflow: hidden;
+    padding-bottom: 13px;
+}
+
+.third-notion-link {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: rgba(250, 250, 250, 1.0);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+    cursor: default;
+}
+
+.third-notion-link:hover,
+.third-notion-link:focus,
+.third-notion-link:active,
+.third-notion-link:visited {
+    color: rgba(250, 250, 250, 1.0);
+    text-decoration: none;
+}
+
+.third-notion-link>* {
+    opacity: 1;
+    transform: translateY(40px);
+    position: relative;
+    z-index: 1;
+    animation: slideUpFromBottom 0.4s ease-out 0.6s forwards;
+    animation-play-state: paused;
+}
+
+.third-notion-underline {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: rgba(250, 250, 250, 1.0);
+    opacity: 0;
+    animation: slideInFromLeft 0.4s ease-out 0.3s forwards;
+    animation-play-state: paused;
+    z-index: 10;
+}
+
+.third-notion-mask.is-visible .third-notion-link>*,
+.third-notion-mask.is-visible .third-notion-underline {
+    animation-play-state: running;
+}
+
+.third-carousel {
+    flex: 1;
+    display: flex;
+    gap: 0;
+    width: calc(100% + 80px);
+    margin-left: -40px;
+    background: #161616;
+    border: 1px solid rgba(250, 250, 250, 0.35);
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: none;
+    scrollbar-width: none;
+    cursor: none !important;
+}
+
+.third-carousel::-webkit-scrollbar {
+    height: 0;
+}
+
+.third-carousel.is-dragging {
+    user-select: none;
+    cursor: none !important;
+}
+
+.third-carousel * {
+    cursor: none !important;
+}
+
+.carousel-item {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-right: 1px solid rgba(250, 250, 250, 0.35);
+    flex: 0 0 calc((100% + 1px) / 3);
+    min-width: calc((100% + 1px) / 3);
+    scroll-snap-align: none;
+    box-sizing: border-box;
+}
+
+.carousel-item:last-child {
+    border-right: none;
+}
+
+.carousel-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+}
+
+.carousel-num {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem;
+    color: rgba(250, 250, 250, 0.7);
+    letter-spacing: 0.5px;
+    transform: translateY(-0.84em);
+    display: inline-block;
+}
+
+.carousel-title {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 2.1rem;
+    color: rgba(250, 250, 250, 1.0);
+    font-weight: 500;
+    line-height: 1;
+}
+
+.carousel-desc {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.1rem;
+    color: rgba(250, 250, 250, 0.7);
+    line-height: 1.35;
+    margin: 0;
+}
+
+.carousel-image {
+    flex: 1;
+    background: #bdbdbd;
+    overflow: hidden;
+}
+
+.carousel-image img {
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+    margin: -1px;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(1);
+    transition: filter 360ms ease;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+.carousel-item:hover .carousel-image img {
+    filter: grayscale(0);
+}
+
+@media (max-width: 1100px) {
+    .third-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .third-right {
+        max-width: 100%;
+    }
+
+    .third-carousel {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .carousel-item:nth-child(2n) {
+        border-right: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .third-content-container {
+        padding: 30px 20px;
+        gap: 24px;
+    }
+
+    .third-big-title {
+        font-size: 6rem;
+        letter-spacing: -2px;
+    }
+
+    .title-line-2 {
+        margin-left: 30px;
+    }
+
+    .small-info-text {
+        font-size: 0.8rem;
+        transform: translateY(-0.6em);
+    }
+
+    .third-carousel {
+        width: calc(100% + 40px);
+        margin-left: -20px;
+        scroll-snap-type: none;
+    }
+
+    .carousel-item {
+        flex: 0 0 85%;
+        min-width: 85%;
+        border-right: 1px solid rgba(250, 250, 250, 0.35);
+    }
+
+    .third-notion-link {
+        font-size: 1rem;
+    }
+}
+

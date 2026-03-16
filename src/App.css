@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #161616;
+  color: #ffffff;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilos para las secciones */
+
+.section {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.first-section {
+  /* El grid y spotlight son fixed, esta sección solo define el espacio de scroll */
+  position: relative;
+  overflow: hidden;
+}
+
+.second-section {
+  /* Cortina: sube por encima del fondo fijo de la primera sección */
+  background-color: #161616;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 20;
+}
+
+.lorem-container {
+  max-width: 1200px;
+  padding: 0 40px;
+  text-align: center;
+}
+
+.lorem-text {
+  font-family: 'Instrument Serif', serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgba(250, 250, 250, 1.0);
+  line-height: 1.2;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .section,
+  .first-section,
+  .second-section,
+  .third-section,
+  .fourth-section,
+  .footer-section {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .lorem-text {
+    font-size: 2.5rem;
+  }
+
+  .lorem-container {
+    padding: 0 20px;
+  }
+}
