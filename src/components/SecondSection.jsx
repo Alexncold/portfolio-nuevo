@@ -218,6 +218,8 @@ const TRAINED_CHEF_FRAMES = [
 ];
 
 const DEFAULT_AVATAR = "https://i.ibb.co/HTjyR6Rg/avatar-big.png";
+const MOBILE_ROLE_SEQUENCE = ['speedwalker', 'dungeonmaster', 'chef']
+const MOBILE_ROLE_INTERVAL_MS = 1500
 
 export default function SecondSection() {
   const sectionRef = useRef(null)
@@ -230,6 +232,9 @@ export default function SecondSection() {
   // Consolidamos el estado de hover
   const [hoveredRole, setHoveredRole] = useState(null) // null | 'speedwalker' | 'dungeonmaster' | 'chef'
   const [walkFrame, setWalkFrame] = useState(0)
+  const [isMobileLayout, setIsMobileLayout] = useState(false)
+  const [mobileRoleIndex, setMobileRoleIndex] = useState(0)
+  const activeAnimationRole = hoveredRole || (isMobileLayout ? MOBILE_ROLE_SEQUENCE[mobileRoleIndex] : null)
 
   // Precarga de imágenes
   useEffect(() => {
@@ -313,21 +318,45 @@ export default function SecondSection() {
 
   // Lógica de animación optimizada
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)')
+    const updateMobileLayout = () => setIsMobileLayout(mediaQuery.matches)
+    updateMobileLayout()
+
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', updateMobileLayout)
+      return () => mediaQuery.removeEventListener('change', updateMobileLayout)
+    }
+
+    mediaQuery.addListener(updateMobileLayout)
+    return () => mediaQuery.removeListener(updateMobileLayout)
+  }, [])
+
+  useEffect(() => {
+    if (!isMobileLayout || !isVisible) return
+
+    const intervalId = setInterval(() => {
+      setMobileRoleIndex((previous) => (previous + 1) % MOBILE_ROLE_SEQUENCE.length)
+    }, MOBILE_ROLE_INTERVAL_MS)
+
+    return () => clearInterval(intervalId)
+  }, [isMobileLayout, isVisible])
+
+  useEffect(() => {
     let rafId;
-    if (hoveredRole) {
-      const isSpeedwalker = hoveredRole === 'speedwalker';
+    if (activeAnimationRole) {
+      const isSpeedwalker = activeAnimationRole === 'speedwalker';
       const maxFrames = isSpeedwalker
         ? SPEEDWALKER_FRAMES.length
-        : hoveredRole === 'dungeonmaster'
+        : activeAnimationRole === 'dungeonmaster'
         ? DUNGEON_MASTER_FRAMES.length
-        : hoveredRole === 'chef'
+        : activeAnimationRole === 'chef'
         ? TRAINED_CHEF_FRAMES.length
         : 2;
       const intervalMs = isSpeedwalker
         ? 40
-        : hoveredRole === 'dungeonmaster'
+        : activeAnimationRole === 'dungeonmaster'
         ? 40
-        : hoveredRole === 'chef'
+        : activeAnimationRole === 'chef'
         ? 100
         : 400;
       let lastTime = performance.now();
@@ -353,7 +382,21 @@ export default function SecondSection() {
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
     };
-  }, [hoveredRole]);
+  }, [activeAnimationRole]);
+
+  const getAnimatedRoleFrame = (role) => {
+    const roleFrames = role === 'speedwalker'
+      ? SPEEDWALKER_FRAMES
+      : role === 'dungeonmaster'
+      ? DUNGEON_MASTER_FRAMES
+      : TRAINED_CHEF_FRAMES
+
+    if (activeAnimationRole !== role) {
+      return roleFrames[0]
+    }
+
+    return roleFrames[walkFrame] || roleFrames[0]
+  }
 
   const currentAvatarInfo = useMemo(() => {
     let src = DEFAULT_AVATAR;
@@ -524,7 +567,7 @@ export default function SecondSection() {
             </div>
             <ul className="side-text-list">
               <li
-                className={isVisible ? 'is-visible' : ''}
+                className={`${isVisible ? 'is-visible' : ''} ${isMobileLayout && activeAnimationRole === 'speedwalker' ? 'is-mobile-active' : ''}`}
                 onMouseEnter={() => setHoveredRole('speedwalker')}
                 onMouseLeave={() => setHoveredRole(null)}
               >
@@ -532,9 +575,12 @@ export default function SecondSection() {
                   {splitText("(01)", 2.6, isVisible)}
                 </span>
                 {splitText(" SPEEDWALKER", 2.7, isVisible)}
+                <span className={`side-text-mobile-anim ${isMobileLayout && activeAnimationRole === 'speedwalker' ? 'is-visible' : ''}`} aria-hidden="true">
+                  <img src={getAnimatedRoleFrame('speedwalker')} alt="" draggable="false" />
+                </span>
               </li>
               <li
-                className={isVisible ? 'is-visible' : ''}
+                className={`${isVisible ? 'is-visible' : ''} ${isMobileLayout && activeAnimationRole === 'dungeonmaster' ? 'is-mobile-active' : ''}`}
                 onMouseEnter={() => setHoveredRole('dungeonmaster')}
                 onMouseLeave={() => setHoveredRole(null)}
               >
@@ -542,9 +588,12 @@ export default function SecondSection() {
                   {splitText("(02)", 3.1, isVisible)}
                 </span>
                 {splitText(" DUNGEON MASTER", 3.2, isVisible)}
+                <span className={`side-text-mobile-anim ${isMobileLayout && activeAnimationRole === 'dungeonmaster' ? 'is-visible' : ''}`} aria-hidden="true">
+                  <img src={getAnimatedRoleFrame('dungeonmaster')} alt="" draggable="false" />
+                </span>
               </li>
               <li
-                className={isVisible ? 'is-visible' : ''}
+                className={`${isVisible ? 'is-visible' : ''} ${isMobileLayout && activeAnimationRole === 'chef' ? 'is-mobile-active' : ''}`}
                 onMouseEnter={() => setHoveredRole('chef')}
                 onMouseLeave={() => setHoveredRole(null)}
               >
@@ -552,6 +601,9 @@ export default function SecondSection() {
                   {splitText("(03)", 3.6, isVisible)}
                 </span>
                 {splitText(" TRAINED CHEF", 3.7, isVisible)}
+                <span className={`side-text-mobile-anim ${isMobileLayout && activeAnimationRole === 'chef' ? 'is-visible' : ''}`} aria-hidden="true">
+                  <img src={getAnimatedRoleFrame('chef')} alt="" draggable="false" />
+                </span>
               </li>
             </ul>
           </div>
