@@ -282,10 +282,15 @@ export default function FourthSection() {
               <path className="fourth-corner-path fourth-corner-path-top" d="M 51 10 L 51 28 Q 51 51 71 51 L 90 51" />
               <path className="fourth-corner-path fourth-corner-path-bottom" d="M 10 49 L 29 49 Q 49 49 49 69 L 49 90" />
             </svg>
-            <p className={`fourth-left-note-text ${isVisible ? 'is-visible' : ''}`}>
+            <p className={`fourth-left-note-text fourth-left-note-text-desktop ${isVisible ? 'is-visible' : ''}`}>
               <span className="fourth-left-note-line fourth-left-note-line-1">{'Redise\u00F1os de sitios, webs atrapantes,'}</span>
               <span className="fourth-left-note-line fourth-left-note-line-2">{'e-commerce que convierten. Trabajemos sobre'}</span>
               <span className="fourth-left-note-line fourth-left-note-line-3">{'lo que necesites.'}</span>
+            </p>
+            <p className={`fourth-left-note-text fourth-left-note-text-mobile ${isVisible ? 'is-visible' : ''}`}>
+              <span className="fourth-left-note-line fourth-left-note-line-1">{'Redise\u00F1os de sitios, webs atrapantes,'}</span>
+              <span className="fourth-left-note-line fourth-left-note-line-2">{'e-commerce que convierten.'}</span>
+              <span className="fourth-left-note-line fourth-left-note-line-3">{'Trabajemos sobre lo que necesites.'}</span>
             </p>
           </div>
           <div className="fourth-whatsapp-floating" aria-hidden="true">
@@ -302,7 +307,6 @@ export default function FourthSection() {
     </section>
   )
 }
-
 
 
 
