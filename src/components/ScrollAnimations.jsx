@@ -10,6 +10,9 @@ export default function ScrollAnimations() {
   const initialStyles = useRef({})
 
   useEffect(() => {
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
+    if (isMobile) return undefined
+
     const assignRefs = () => {
       titleRef.current = document.querySelector('.prueba-text')
       subtitleRef.current = document.querySelector('.subtitle')
@@ -218,4 +221,3 @@ export default function ScrollAnimations() {
 
   return null
 }
-
