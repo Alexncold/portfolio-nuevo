@@ -61,11 +61,28 @@ body {
 
 @media (max-width: 768px) {
   html,
+  body {
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 8px;
+  }
+
+  html,
   body,
   #root {
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
+  }
+
+  .section {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+    scroll-margin-top: 8px;
+  }
+
+  .first-section {
+    height: 100svh;
+    min-height: 100svh;
   }
 
   .section,

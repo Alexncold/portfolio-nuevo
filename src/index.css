@@ -901,7 +901,7 @@ button:focus-visible {
 
 @media (max-width: 768px) {
   .title-group {
-    top: 33%;
+    top: 40%;
   }
 
   .location-text {
