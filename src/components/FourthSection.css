@@ -688,7 +688,7 @@
 
 @media (max-width: 768px) {
   .fourth-talk-marquee {
-    top: 134px;
+    top: 88px;
     left: 50%;
     right: auto;
     width: calc(100% - 32px);
