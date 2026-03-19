@@ -1065,6 +1065,11 @@ button:focus-visible {
   }
 
   .navbar {
+    position: absolute;
+    top: 2vh;
+    left: 0;
+    transform: none;
+    max-width: none;
     width: 100%;
     /* ← MÓVIL: Ancho completo */
     padding: 0 20px;
@@ -1072,8 +1077,14 @@ button:focus-visible {
   }
 
   .content-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: none;
     width: 100%;
-    /* ← MÓVIL: Ancho completo */
+    max-width: none;
+    height: 100%;
+    /* ← MÓVIL: Que se mueva junto a la sección 1 */
     padding: 0 20px;
     /* ← MÓVIL: Pequeños márgenes laterales */
   }
