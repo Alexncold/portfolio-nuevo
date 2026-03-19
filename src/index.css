@@ -945,8 +945,6 @@ button:focus-visible {
     height: 920px;
     min-height: 920px;
     overflow: hidden;
-    border-top: 2px solid red;
-    border-bottom: 2px solid red;
   }
 
   .second-section .section-text-block {
