@@ -368,6 +368,16 @@
 }
 
 @media (max-width: 768px) {
+    .title-line-1,
+    .title-line-2 {
+        opacity: 0;
+    }
+
+    .title-line-1.is-visible,
+    .title-line-2.is-visible {
+        opacity: 1;
+    }
+
     .section.third-section {
         height: auto;
     }
@@ -426,10 +436,12 @@
     }
 
     .carousel-item {
+        padding: 24px 20px 8px;
         flex: 0 0 100%;
         min-width: 100%;
         height: auto;
         align-self: flex-start;
+        justify-content: flex-start;
         border-right: 0;
         border-left: 1px solid rgba(250, 250, 250, 0.45);
     }

@@ -942,8 +942,8 @@ button:focus-visible {
   }
 
   .second-section {
-    height: 820px;
-    min-height: 820px;
+    height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
   }
 
