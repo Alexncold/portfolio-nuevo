@@ -220,6 +220,7 @@ const TRAINED_CHEF_FRAMES = [
 const DEFAULT_AVATAR = "https://i.ibb.co/HTjyR6Rg/avatar-big.png";
 const MOBILE_ROLE_SEQUENCE = ['speedwalker', 'dungeonmaster', 'chef']
 const MOBILE_ROLE_INTERVAL_MS = 1500
+const MOBILE_ROLE_START_DELAY_MS = 4300
 
 export default function SecondSection() {
   const sectionRef = useRef(null)
@@ -234,7 +235,8 @@ export default function SecondSection() {
   const [walkFrame, setWalkFrame] = useState(0)
   const [isMobileLayout, setIsMobileLayout] = useState(false)
   const [mobileRoleIndex, setMobileRoleIndex] = useState(0)
-  const activeAnimationRole = hoveredRole || (isMobileLayout ? MOBILE_ROLE_SEQUENCE[mobileRoleIndex] : null)
+  const [isMobileRoleCycleReady, setIsMobileRoleCycleReady] = useState(false)
+  const activeAnimationRole = hoveredRole || (isMobileLayout && isMobileRoleCycleReady ? MOBILE_ROLE_SEQUENCE[mobileRoleIndex] : null)
 
   // Precarga de imágenes
   useEffect(() => {
@@ -332,14 +334,31 @@ export default function SecondSection() {
   }, [])
 
   useEffect(() => {
-    if (!isMobileLayout || !isVisible) return
+    if (!isMobileLayout || !isVisible) {
+      setIsMobileRoleCycleReady(false)
+      setMobileRoleIndex(0)
+      return
+    }
+
+    setIsMobileRoleCycleReady(false)
+    setMobileRoleIndex(0)
+
+    const readyTimeoutId = setTimeout(() => {
+      setIsMobileRoleCycleReady(true)
+    }, MOBILE_ROLE_START_DELAY_MS)
+
+    return () => clearTimeout(readyTimeoutId)
+  }, [isMobileLayout, isVisible])
+
+  useEffect(() => {
+    if (!isMobileLayout || !isVisible || !isMobileRoleCycleReady) return
 
     const intervalId = setInterval(() => {
       setMobileRoleIndex((previous) => (previous + 1) % MOBILE_ROLE_SEQUENCE.length)
     }, MOBILE_ROLE_INTERVAL_MS)
 
     return () => clearInterval(intervalId)
-  }, [isMobileLayout, isVisible])
+  }, [isMobileLayout, isVisible, isMobileRoleCycleReady])
 
   useEffect(() => {
     let rafId;
