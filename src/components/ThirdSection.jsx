@@ -17,7 +17,7 @@ const PROJECTS = [
     {
         num: '(03)',
         title: 'Landing pages',
-        desc: 'Diseño web para software factory.',
+        desc: 'Diseño web y landing pages para software factory',
         image: '/cover-images/soft-factory-image-cover.webp'
     },
     {
