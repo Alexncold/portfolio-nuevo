@@ -901,10 +901,11 @@ button:focus-visible {
 
 @media (max-width: 768px) {
   .title-group {
-    top: 40%;
+    top: 44%;
   }
 
   .location-text {
+    top: 79%;
     left: calc(50% - 150px);
     padding-left: 0;
   }
@@ -912,11 +913,12 @@ button:focus-visible {
   .content-container > .location-text-light {
     left: calc(50% - 150px);
     padding-left: 0;
-    top: calc(75% + 64px);
+    top: calc(79% + 64px);
     transform: none;
   }
 
   .location-text-right {
+    top: 79%;
     left: calc(50% + 6px);
     right: auto;
   }
