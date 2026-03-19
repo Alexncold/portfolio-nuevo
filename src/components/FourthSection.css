@@ -706,7 +706,7 @@
   .fourth-left-note {
     left: 0;
     right: 0;
-    bottom: 12px;
+    bottom: 0;
     width: 100%;
     transform: none;
     display: flex;
