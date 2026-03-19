@@ -6,49 +6,57 @@ const PROJECTS = [
         num: '(01)',
         title: 'Sistema de reservas',
         desc: 'Diseño e implementación de un sistema de turnos.',
-        image: '/cover-images/cover-sistema-de-reservas.webp'
+        image: '/cover-images/cover-sistema-de-reservas.webp',
+        notionUrl: 'https://www.notion.so/alejandrostafuza/Sistema-de-Reservas-2d9304a8e6c58080aacdf57758b0600e'
     },
     {
         num: '(02)',
         title: 'Cloud camera software',
         desc: 'Rediseño de una aplicación de seguridad basada en la nube',
-        image: '/cover-images/mc-portada.webp'
+        image: '/cover-images/mc-portada.webp',
+        notionUrl: 'https://www.notion.so/alejandrostafuza/Cloud-Camera-Software-50116bf9d4d2472d8b99e46b001ab5dd'
     },
     {
         num: '(03)',
         title: 'Landing pages',
         desc: 'Diseño web y landing pages para software factory',
-        image: '/cover-images/soft-factory-image-cover.webp'
+        image: '/cover-images/soft-factory-image-cover.webp',
+        notionUrl: 'https://www.notion.so/alejandrostafuza/Dise-o-Web-para-Software-Factory-16e304a8e6c580e59b47d56fefb65b6e'
     },
     {
         num: '(04)',
         title: 'Sistema de métricas',
         desc: 'Integración de dos softwares en uno: CRM + Métricas.',
-        image: '/cover-images/cover-metrichub.webp'
+        image: '/cover-images/cover-metrichub.webp',
+        notionUrl: 'https://www.notion.so/alejandrostafuza/Sistema-Integral-de-M-tricas-2cf2050ad5b14a049da282e54e5955bf'
     },
     {
         num: '(05)',
         title: 'Sistema de pedidos',
         desc: 'Diseño de sistema de reposición de stock.',
-        image: '/cover-images/sistema-cover.webp'
+        image: '/cover-images/sistema-cover.webp',
+        notionUrl: 'https://www.notion.so/alejandrostafuza/Sistema-de-Pedidos-3e648bcc5f974c7ba7d2c86bbadf767e'
     },
     {
         num: '(06)',
         title: 'App de delivery',
         desc: 'Creación de una app de pedidos de comida.',
-        image: '/cover-images/pizzapp-cover.webp'
+        image: '/cover-images/pizzapp-cover.webp',
+        notionUrl: 'https://www.notion.so/alejandrostafuza/App-de-Delivery-de-Comida-Italiana-6c77137355e74114bb22633687741ebe'
     },
     {
         num: '(07)',
         title: 'Sitio web de comidas',
         desc: 'Transformación progresiva de app de comidas en sitio web.',
-        image: '/cover-images/pizzaweb-cover.webp'
+        image: '/cover-images/pizzaweb-cover.webp',
+        notionUrl: 'https://www.notion.so/alejandrostafuza/Sitio-Web-de-Comida-Italiana-cd7e98f2efc64f11a5d4a19b2c9d0568'
     },
     {
         num: '(08)',
         title: 'Sitio de impresiones 3D',
         desc: 'Diseño de sitio web para emprendimiento.',
-        image: '/cover-images/sam3d-portada.webp'
+        image: '/cover-images/sam3d-portada.webp',
+        notionUrl: 'https://www.notion.so/alejandrostafuza/Sitio-web-para-impresiones-3D-120ec8ed3e2a4971bd43bcd78a088491'
     }
 ]
 
@@ -214,7 +222,7 @@ export default function ThirdSection() {
                         <div className="third-notion-container">
                             <div className={`third-notion-mask ${isVisible ? 'is-visible' : ''}`}>
                                 <a className="third-notion-link" href="#" onClick={(e) => e.preventDefault()}>
-                                    <span>Abre en Notion</span>
+                                    <span>Abren en Notion</span>
                                     <span className="material-symbols-outlined">east</span>
                                 </a>
                                 <div className="third-notion-underline"></div>
@@ -226,6 +234,19 @@ export default function ThirdSection() {
                 <div className="third-carousel" aria-label="Carousel de proyectos" ref={carouselRef}>
                     {PROJECTS.map((item, index) => {
                         const isInverted = index % 2 === 1
+                        const hasNotionUrl = item.notionUrl.trim() !== ''
+                        const projectLinkProps = hasNotionUrl
+                            ? {
+                                href: item.notionUrl,
+                                target: '_blank',
+                                rel: 'noopener noreferrer',
+                            }
+                            : {
+                                href: '#',
+                                onClick: (event) => event.preventDefault(),
+                                'aria-disabled': 'true',
+                            }
+
                         return (
                             <div
                                 key={item.num}
@@ -235,22 +256,30 @@ export default function ThirdSection() {
                                     <>
                                         <div className="carousel-header">
                                             <span className="carousel-num">{item.num}</span>
-                                            <span className="carousel-title">{item.title}</span>
+                                            <a className="carousel-title-link" {...projectLinkProps}>
+                                                <span className="carousel-title">{item.title}</span>
+                                            </a>
                                         </div>
                                         <p className="carousel-desc">{item.desc}</p>
                                         <div className="carousel-image">
-                                            <img src={item.image} alt={item.title} loading="lazy" draggable="false" />
+                                            <a className="carousel-image-link" {...projectLinkProps}>
+                                                <img src={item.image} alt={item.title} loading="lazy" draggable="false" />
+                                            </a>
                                         </div>
                                     </>
                                 )}
                                 {isInverted && (
                                     <>
                                         <div className="carousel-image">
-                                            <img src={item.image} alt={item.title} loading="lazy" draggable="false" />
+                                            <a className="carousel-image-link" {...projectLinkProps}>
+                                                <img src={item.image} alt={item.title} loading="lazy" draggable="false" />
+                                            </a>
                                         </div>
                                         <div className="carousel-header">
                                             <span className="carousel-num">{item.num}</span>
-                                            <span className="carousel-title">{item.title}</span>
+                                            <a className="carousel-title-link" {...projectLinkProps}>
+                                                <span className="carousel-title">{item.title}</span>
+                                            </a>
                                         </div>
                                         <p className="carousel-desc">{item.desc}</p>
                                     </>
