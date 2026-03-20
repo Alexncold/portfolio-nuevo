@@ -262,6 +262,12 @@ export default function SecondSection() {
   const [mobileRoleIndex, setMobileRoleIndex] = useState(0)
   const [isMobileRoleCycleReady, setIsMobileRoleCycleReady] = useState(false)
   const activeAnimationRole = hoveredRole || (isMobileLayout && isMobileRoleCycleReady ? MOBILE_ROLE_SEQUENCE[mobileRoleIndex] : null)
+  const setHoveredRoleStable = (role) => {
+    setHoveredRole((previous) => (previous === role ? previous : role))
+  }
+  const clearHoveredRole = () => {
+    setHoveredRole((previous) => (previous == null ? previous : null))
+  }
 
   // Precarga de imágenes
   useEffect(() => {
@@ -395,6 +401,7 @@ export default function SecondSection() {
 
   useEffect(() => {
     let rafId;
+    let resetRafId;
     if (activeAnimationRole) {
       const activeRoleFrames = getRoleFrames(activeAnimationRole, isMobileLayout)
       const maxFrames = Math.max(activeRoleFrames.length, 1)
@@ -407,19 +414,31 @@ export default function SecondSection() {
         lastTime = time;
         accumulator += delta;
 
-        if (accumulator >= intervalMs) {
-          const steps = Math.floor(accumulator / intervalMs)
-          accumulator -= steps * intervalMs
-          setWalkFrame(prev => (prev + steps) % maxFrames)
+        if (isMobileLayout) {
+          if (accumulator >= intervalMs) {
+            const steps = Math.floor(accumulator / intervalMs)
+            accumulator -= steps * intervalMs
+            setWalkFrame(prev => (prev + steps) % maxFrames)
+          }
+        } else {
+          while (accumulator >= intervalMs) {
+            accumulator -= intervalMs
+            setWalkFrame(prev => (prev + 1) % maxFrames)
+          }
         }
 
         rafId = requestAnimationFrame(tick);
       };
 
       rafId = requestAnimationFrame(tick);
+    } else {
+      resetRafId = requestAnimationFrame(() => {
+        setWalkFrame(0)
+      })
     }
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
+      if (resetRafId) cancelAnimationFrame(resetRafId);
     };
   }, [activeAnimationRole, isMobileLayout]);
 
@@ -603,11 +622,11 @@ export default function SecondSection() {
               <p className="side-text-title">Pero también soy</p>
               <div className="side-text-title-underline"></div>
             </div>
-            <ul className="side-text-list">
+            <ul className="side-text-list" onMouseLeave={clearHoveredRole}>
               <li
                 className={`${isVisible ? 'is-visible' : ''} ${isMobileLayout && activeAnimationRole === 'speedwalker' ? 'is-mobile-active' : ''}`}
-                onMouseEnter={() => setHoveredRole('speedwalker')}
-                onMouseLeave={() => setHoveredRole(null)}
+                onMouseEnter={() => setHoveredRoleStable('speedwalker')}
+                onMouseMove={() => setHoveredRoleStable('speedwalker')}
               >
                 <span className="item-num">
                   {splitText("(01)", 2.6, isVisible)}
@@ -619,8 +638,8 @@ export default function SecondSection() {
               </li>
               <li
                 className={`${isVisible ? 'is-visible' : ''} ${isMobileLayout && activeAnimationRole === 'dungeonmaster' ? 'is-mobile-active' : ''}`}
-                onMouseEnter={() => setHoveredRole('dungeonmaster')}
-                onMouseLeave={() => setHoveredRole(null)}
+                onMouseEnter={() => setHoveredRoleStable('dungeonmaster')}
+                onMouseMove={() => setHoveredRoleStable('dungeonmaster')}
               >
                 <span className="item-num">
                   {splitText("(02)", 3.1, isVisible)}
@@ -632,8 +651,8 @@ export default function SecondSection() {
               </li>
               <li
                 className={`${isVisible ? 'is-visible' : ''} ${isMobileLayout && activeAnimationRole === 'chef' ? 'is-mobile-active' : ''}`}
-                onMouseEnter={() => setHoveredRole('chef')}
-                onMouseLeave={() => setHoveredRole(null)}
+                onMouseEnter={() => setHoveredRoleStable('chef')}
+                onMouseMove={() => setHoveredRoleStable('chef')}
               >
                 <span className="item-num">
                   {splitText("(03)", 3.6, isVisible)}
