@@ -217,6 +217,31 @@ const TRAINED_CHEF_FRAMES = [
   "/frames/chef/frame_0020.png",
 ];
 
+const sampleFrames = (frames, step) => frames.filter((_, index) => index % step === 0)
+const MOBILE_SPEEDWALKER_FRAMES = sampleFrames(SPEEDWALKER_FRAMES, 3)
+const MOBILE_DUNGEON_MASTER_FRAMES = sampleFrames(DUNGEON_MASTER_FRAMES, 2)
+const MOBILE_TRAINED_CHEF_FRAMES = sampleFrames(TRAINED_CHEF_FRAMES, 2)
+
+const getRoleFrames = (role, isMobileLayout) => {
+  if (role === 'speedwalker') {
+    return isMobileLayout ? MOBILE_SPEEDWALKER_FRAMES : SPEEDWALKER_FRAMES
+  }
+  if (role === 'dungeonmaster') {
+    return isMobileLayout ? MOBILE_DUNGEON_MASTER_FRAMES : DUNGEON_MASTER_FRAMES
+  }
+  return isMobileLayout ? MOBILE_TRAINED_CHEF_FRAMES : TRAINED_CHEF_FRAMES
+}
+
+const getRoleFrameIntervalMs = (role, isMobileLayout) => {
+  if (role === 'speedwalker') {
+    return isMobileLayout ? 70 : 40
+  }
+  if (role === 'dungeonmaster') {
+    return isMobileLayout ? 70 : 40
+  }
+  return isMobileLayout ? 120 : 100
+}
+
 const DEFAULT_AVATAR = "https://i.ibb.co/HTjyR6Rg/avatar-big.png";
 const MOBILE_ROLE_SEQUENCE = ['speedwalker', 'dungeonmaster', 'chef']
 const MOBILE_ROLE_INTERVAL_MS = 1500
@@ -240,10 +265,11 @@ export default function SecondSection() {
 
   // Precarga de imágenes
   useEffect(() => {
+    const isMobileDevice = window.matchMedia('(max-width: 768px)').matches
     const allImages = [
-      ...SPEEDWALKER_FRAMES,
-      ...DUNGEON_MASTER_FRAMES,
-      ...TRAINED_CHEF_FRAMES,
+      ...getRoleFrames('speedwalker', isMobileDevice),
+      ...getRoleFrames('dungeonmaster', isMobileDevice),
+      ...getRoleFrames('chef', isMobileDevice),
       DEFAULT_AVATAR
     ];
     allImages.forEach(src => {
@@ -335,19 +361,26 @@ export default function SecondSection() {
 
   useEffect(() => {
     if (!isMobileLayout || !isVisible) {
-      setIsMobileRoleCycleReady(false)
-      setMobileRoleIndex(0)
-      return
+      const resetRafId = requestAnimationFrame(() => {
+        setIsMobileRoleCycleReady(false)
+        setMobileRoleIndex(0)
+      })
+      return () => cancelAnimationFrame(resetRafId)
     }
 
-    setIsMobileRoleCycleReady(false)
-    setMobileRoleIndex(0)
+    const initRafId = requestAnimationFrame(() => {
+      setIsMobileRoleCycleReady(false)
+      setMobileRoleIndex(0)
+    })
 
     const readyTimeoutId = setTimeout(() => {
       setIsMobileRoleCycleReady(true)
     }, MOBILE_ROLE_START_DELAY_MS)
 
-    return () => clearTimeout(readyTimeoutId)
+    return () => {
+      cancelAnimationFrame(initRafId)
+      clearTimeout(readyTimeoutId)
+    }
   }, [isMobileLayout, isVisible])
 
   useEffect(() => {
@@ -363,21 +396,9 @@ export default function SecondSection() {
   useEffect(() => {
     let rafId;
     if (activeAnimationRole) {
-      const isSpeedwalker = activeAnimationRole === 'speedwalker';
-      const maxFrames = isSpeedwalker
-        ? SPEEDWALKER_FRAMES.length
-        : activeAnimationRole === 'dungeonmaster'
-        ? DUNGEON_MASTER_FRAMES.length
-        : activeAnimationRole === 'chef'
-        ? TRAINED_CHEF_FRAMES.length
-        : 2;
-      const intervalMs = isSpeedwalker
-        ? 40
-        : activeAnimationRole === 'dungeonmaster'
-        ? 40
-        : activeAnimationRole === 'chef'
-        ? 100
-        : 400;
+      const activeRoleFrames = getRoleFrames(activeAnimationRole, isMobileLayout)
+      const maxFrames = Math.max(activeRoleFrames.length, 1)
+      const intervalMs = getRoleFrameIntervalMs(activeAnimationRole, isMobileLayout)
       let lastTime = performance.now();
       let accumulator = 0;
 
@@ -386,29 +407,24 @@ export default function SecondSection() {
         lastTime = time;
         accumulator += delta;
 
-        while (accumulator >= intervalMs) {
-          accumulator -= intervalMs;
-          setWalkFrame(prev => (prev + 1) % maxFrames);
+        if (accumulator >= intervalMs) {
+          const steps = Math.floor(accumulator / intervalMs)
+          accumulator -= steps * intervalMs
+          setWalkFrame(prev => (prev + steps) % maxFrames)
         }
 
         rafId = requestAnimationFrame(tick);
       };
 
       rafId = requestAnimationFrame(tick);
-    } else {
-      setWalkFrame(0);
     }
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
     };
-  }, [activeAnimationRole]);
+  }, [activeAnimationRole, isMobileLayout]);
 
   const getAnimatedRoleFrame = (role) => {
-    const roleFrames = role === 'speedwalker'
-      ? SPEEDWALKER_FRAMES
-      : role === 'dungeonmaster'
-      ? DUNGEON_MASTER_FRAMES
-      : TRAINED_CHEF_FRAMES
+    const roleFrames = getRoleFrames(role, isMobileLayout)
 
     if (activeAnimationRole !== role) {
       return roleFrames[0]
@@ -422,15 +438,18 @@ export default function SecondSection() {
     let transform = "";
 
     if (hoveredRole === 'speedwalker') {
-      src = SPEEDWALKER_FRAMES[walkFrame] || SPEEDWALKER_FRAMES[0];
+      const speedwalkerFrames = getRoleFrames('speedwalker', isMobileLayout)
+      src = speedwalkerFrames[walkFrame] || speedwalkerFrames[0];
     } else if (hoveredRole === 'dungeonmaster') {
-      src = DUNGEON_MASTER_FRAMES[walkFrame] || DUNGEON_MASTER_FRAMES[0];
+      const dungeonMasterFrames = getRoleFrames('dungeonmaster', isMobileLayout)
+      src = dungeonMasterFrames[walkFrame] || dungeonMasterFrames[0];
     } else if (hoveredRole === 'chef') {
-      src = TRAINED_CHEF_FRAMES[walkFrame] || TRAINED_CHEF_FRAMES[0];
+      const chefFrames = getRoleFrames('chef', isMobileLayout)
+      src = chefFrames[walkFrame] || chefFrames[0];
     }
 
     return { src, transform };
-  }, [hoveredRole, walkFrame]);
+  }, [hoveredRole, isMobileLayout, walkFrame]);
 
   return (
     <section id="section-2" className="section second-section" ref={sectionRef}>
