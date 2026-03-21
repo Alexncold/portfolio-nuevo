@@ -218,26 +218,28 @@ const TRAINED_CHEF_FRAMES = [
 ];
 
 const sampleFrames = (frames, step) => frames.filter((_, index) => index % step === 0)
+const DESKTOP_SPEEDWALKER_FRAMES = sampleFrames(SPEEDWALKER_FRAMES, 2)
+const DESKTOP_DUNGEON_MASTER_FRAMES = sampleFrames(DUNGEON_MASTER_FRAMES, 2)
 const MOBILE_SPEEDWALKER_FRAMES = sampleFrames(SPEEDWALKER_FRAMES, 3)
 const MOBILE_DUNGEON_MASTER_FRAMES = sampleFrames(DUNGEON_MASTER_FRAMES, 2)
 const MOBILE_TRAINED_CHEF_FRAMES = sampleFrames(TRAINED_CHEF_FRAMES, 2)
 
 const getRoleFrames = (role, isMobileLayout) => {
   if (role === 'speedwalker') {
-    return isMobileLayout ? MOBILE_SPEEDWALKER_FRAMES : SPEEDWALKER_FRAMES
+    return isMobileLayout ? MOBILE_SPEEDWALKER_FRAMES : DESKTOP_SPEEDWALKER_FRAMES
   }
   if (role === 'dungeonmaster') {
-    return isMobileLayout ? MOBILE_DUNGEON_MASTER_FRAMES : DUNGEON_MASTER_FRAMES
+    return isMobileLayout ? MOBILE_DUNGEON_MASTER_FRAMES : DESKTOP_DUNGEON_MASTER_FRAMES
   }
   return isMobileLayout ? MOBILE_TRAINED_CHEF_FRAMES : TRAINED_CHEF_FRAMES
 }
 
 const getRoleFrameIntervalMs = (role, isMobileLayout) => {
   if (role === 'speedwalker') {
-    return isMobileLayout ? 70 : 40
+    return isMobileLayout ? 70 : 80
   }
   if (role === 'dungeonmaster') {
-    return isMobileLayout ? 70 : 40
+    return isMobileLayout ? 70 : 80
   }
   return isMobileLayout ? 120 : 100
 }
