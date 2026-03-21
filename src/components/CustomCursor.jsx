@@ -2,13 +2,31 @@ import { useState, useEffect } from 'react'
 import './CustomCursor.css'
 
 export default function CustomCursor() {
-  const [position, setPosition] = useState({ x: 0, y: 0 })
+  const [position, setPosition] = useState({ x: -100, y: -100 })
+  const [isDesktopCursor, setIsDesktopCursor] = useState(false)
   const [isInSecondSection, setIsInSecondSection] = useState(false)
   const [isOverThirdCarousel, setIsOverThirdCarousel] = useState(false)
   const [isMouseDown, setIsMouseDown] = useState(false)
   const [useNativePointer, setUseNativePointer] = useState(false)
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 769px) and (hover: hover) and (pointer: fine)')
+    const updateDesktopCursor = () => setIsDesktopCursor(mediaQuery.matches)
+
+    updateDesktopCursor()
+
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', updateDesktopCursor)
+      return () => mediaQuery.removeEventListener('change', updateDesktopCursor)
+    }
+
+    mediaQuery.addListener(updateDesktopCursor)
+    return () => mediaQuery.removeListener(updateDesktopCursor)
+  }, [])
+
+  useEffect(() => {
+    if (!isDesktopCursor) return undefined
+
     const handleMouseMove = (e) => {
       setPosition({ x: e.clientX, y: e.clientY })
 
@@ -45,7 +63,9 @@ export default function CustomCursor() {
       window.removeEventListener('mousedown', handleMouseDown)
       window.removeEventListener('mouseup', handleMouseUp)
     }
-  }, [])
+  }, [isDesktopCursor])
+
+  if (!isDesktopCursor) return null
 
   return (
     <>

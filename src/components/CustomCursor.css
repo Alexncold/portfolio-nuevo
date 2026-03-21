@@ -1,6 +1,17 @@
-/* Ocultar cursor por defecto */
-body {
-  cursor: none !important;
+@media (min-width: 769px) and (hover: hover) and (pointer: fine) {
+  /* Ocultar cursor por defecto solo en desktop real */
+  body {
+    cursor: none !important;
+  }
+
+  /* Efecto hover para elementos interactivos */
+  button, a, input, textarea, [role="button"] {
+    cursor: none !important;
+  }
+
+  button:hover, a:hover, input:hover, textarea:hover, [role="button"]:hover {
+    cursor: none !important;
+  }
 }
 
 /* Círculo exterior */
@@ -30,15 +41,6 @@ body {
   transform: translate(-50%, -50%);
   mix-blend-mode: difference;
   transition: background-color 0.22s ease, opacity 0.22s ease, transform 0.22s ease;
-}
-
-/* Efecto hover para elementos interactivos */
-button, a, input, textarea, [role="button"] {
-  cursor: none !important;
-}
-
-button:hover, a:hover, input:hover, textarea:hover, [role="button"]:hover {
-  cursor: none !important;
 }
 
 .use-native-cursor,
