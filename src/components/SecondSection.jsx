@@ -268,6 +268,12 @@ export default function SecondSection() {
   const clearHoveredRole = () => {
     setHoveredRole((previous) => (previous == null ? previous : null))
   }
+  const itemNumber01 = useMemo(() => splitText("(01)", 2.6, isVisible), [isVisible])
+  const itemLabelSpeedwalker = useMemo(() => splitText(" SPEEDWALKER", 2.7, isVisible), [isVisible])
+  const itemNumber02 = useMemo(() => splitText("(02)", 3.1, isVisible), [isVisible])
+  const itemLabelDungeonMaster = useMemo(() => splitText(" DUNGEON MASTER", 3.2, isVisible), [isVisible])
+  const itemNumber03 = useMemo(() => splitText("(03)", 3.6, isVisible), [isVisible])
+  const itemLabelChef = useMemo(() => splitText(" TRAINED CHEF", 3.7, isVisible), [isVisible])
 
   // Precarga de imágenes
   useEffect(() => {
@@ -414,17 +420,10 @@ export default function SecondSection() {
         lastTime = time;
         accumulator += delta;
 
-        if (isMobileLayout) {
-          if (accumulator >= intervalMs) {
-            const steps = Math.floor(accumulator / intervalMs)
-            accumulator -= steps * intervalMs
-            setWalkFrame(prev => (prev + steps) % maxFrames)
-          }
-        } else {
-          while (accumulator >= intervalMs) {
-            accumulator -= intervalMs
-            setWalkFrame(prev => (prev + 1) % maxFrames)
-          }
+        if (accumulator >= intervalMs) {
+          const steps = Math.floor(accumulator / intervalMs)
+          accumulator -= steps * intervalMs
+          setWalkFrame(prev => (prev + steps) % maxFrames)
         }
 
         rafId = requestAnimationFrame(tick);
@@ -626,12 +625,11 @@ export default function SecondSection() {
               <li
                 className={`${isVisible ? 'is-visible' : ''} ${isMobileLayout && activeAnimationRole === 'speedwalker' ? 'is-mobile-active' : ''}`}
                 onMouseEnter={() => setHoveredRoleStable('speedwalker')}
-                onMouseMove={() => setHoveredRoleStable('speedwalker')}
               >
                 <span className="item-num">
-                  {splitText("(01)", 2.6, isVisible)}
+                  {itemNumber01}
                 </span>
-                {splitText(" SPEEDWALKER", 2.7, isVisible)}
+                {itemLabelSpeedwalker}
                 <span className={`side-text-mobile-anim ${isMobileLayout && activeAnimationRole === 'speedwalker' ? 'is-visible' : ''}`} aria-hidden="true">
                   <img src={getAnimatedRoleFrame('speedwalker')} alt="" draggable="false" />
                 </span>
@@ -639,12 +637,11 @@ export default function SecondSection() {
               <li
                 className={`${isVisible ? 'is-visible' : ''} ${isMobileLayout && activeAnimationRole === 'dungeonmaster' ? 'is-mobile-active' : ''}`}
                 onMouseEnter={() => setHoveredRoleStable('dungeonmaster')}
-                onMouseMove={() => setHoveredRoleStable('dungeonmaster')}
               >
                 <span className="item-num">
-                  {splitText("(02)", 3.1, isVisible)}
+                  {itemNumber02}
                 </span>
-                {splitText(" DUNGEON MASTER", 3.2, isVisible)}
+                {itemLabelDungeonMaster}
                 <span className={`side-text-mobile-anim ${isMobileLayout && activeAnimationRole === 'dungeonmaster' ? 'is-visible' : ''}`} aria-hidden="true">
                   <img src={getAnimatedRoleFrame('dungeonmaster')} alt="" draggable="false" />
                 </span>
@@ -652,12 +649,11 @@ export default function SecondSection() {
               <li
                 className={`${isVisible ? 'is-visible' : ''} ${isMobileLayout && activeAnimationRole === 'chef' ? 'is-mobile-active' : ''}`}
                 onMouseEnter={() => setHoveredRoleStable('chef')}
-                onMouseMove={() => setHoveredRoleStable('chef')}
               >
                 <span className="item-num">
-                  {splitText("(03)", 3.6, isVisible)}
+                  {itemNumber03}
                 </span>
-                {splitText(" TRAINED CHEF", 3.7, isVisible)}
+                {itemLabelChef}
                 <span className={`side-text-mobile-anim ${isMobileLayout && activeAnimationRole === 'chef' ? 'is-visible' : ''}`} aria-hidden="true">
                   <img src={getAnimatedRoleFrame('chef')} alt="" draggable="false" />
                 </span>
